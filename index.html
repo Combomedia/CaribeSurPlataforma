@@ -12,15 +12,17 @@
             --color-darker: #051016;
             --color-primary: #1E5631;
             --color-primary-light: #2A7D4A;
-            --color-accent: #A4DE02;
-            --color-accent-dark: #76BA1B;
+            --color-accent: #4CAF50;
+            --color-accent-dark: #388E3C;
             --color-water: #2E86AB;
             --color-text: #E0E0E0;
             --color-text-light: #FFFFFF;
-            --color-card: #132C3D;
-            --color-card-light: #1C3E56;
+            --color-card: #1C2E40;
+            --color-card-light: #243B53;
             --color-error: #e74c3c;
             --color-success: #2ecc71;
+            --color-current-day: #3A8FB7;
+            --color-filter-active: #4CAF50;
             --font-main: 'Montserrat', sans-serif;
             --font-heading: 'Playfair Display', serif;
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -127,13 +129,14 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 16px 32px;
+            gap: 8px;
+            padding: 14px 28px;
             background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
             color: white;
             border: none;
             border-radius: 50px;
             font-weight: 600;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: var(--transition);
             box-shadow: var(--shadow);
@@ -164,18 +167,33 @@
 
         .btn-accent {
             background: linear-gradient(135deg, var(--color-accent-dark) 0%, var(--color-accent) 100%);
-            color: var(--color-dark);
         }
 
         .btn-hero {
-            padding: 18px 36px;
-            font-size: 1.1rem;
-            box-shadow: 0 10px 30px rgba(164, 222, 2, 0.3);
+            padding: 16px 32px;
+            font-size: 1rem;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
         }
 
         .btn-small {
-            padding: 10px 20px;
-            font-size: 0.9rem;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+
+        .btn-tiny {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+        }
+
+        .btn-filter {
+            background: var(--color-card);
+            color: var(--color-text);
+        }
+
+        .btn-filter.active {
+            background: var(--color-filter-active);
+            color: white;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.4);
         }
 
         .card {
@@ -275,12 +293,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-decoration: none;
         }
 
         nav ul li a i {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 5px;
         }
 
@@ -433,45 +451,62 @@
             transform: translateX(0);
         }
 
-        .map-placeholder {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-water) 100%);
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-            text-align: center;
-            padding: 2rem;
+        .image-carousel {
             position: relative;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
+            border-radius: var(--radius);
         }
 
-        .map-placeholder::before {
-            content: '';
+        .carousel-inner {
+            display: flex;
+            width: 400%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            animation: carouselAnimation 20s infinite;
+        }
+
+        .carousel-item {
+            width: 25%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8) contrast(1.1);
+        }
+
+        .carousel-overlay {
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(255, 255, 255, 0.1) 10px,
-                rgba(255, 255, 255, 0.1) 20px
-            );
-            animation: mapShine 10s linear infinite;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px;
+            color: white;
+            text-align: center;
         }
 
-        @keyframes mapShine {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+        .carousel-overlay h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .carousel-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        @keyframes carouselAnimation {
+            0%, 20% { transform: translateX(0); }
+            25%, 45% { transform: translateX(-25%); }
+            50%, 70% { transform: translateX(-50%); }
+            75%, 95% { transform: translateX(-75%); }
+            100% { transform: translateX(0); }
         }
 
         /* News Section */
@@ -503,6 +538,9 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
+            background-color: var(--color-darker);
+            padding: 15px;
+            border-radius: var(--radius);
         }
 
         .tiktok-video {
@@ -521,6 +559,7 @@
             width: 100%;
             height: 100%;
             border: none;
+            border-radius: var(--radius);
         }
 
         .tiktok-placeholder {
@@ -577,14 +616,26 @@
             line-height: 1.5;
         }
 
-        .news-item a {
+        .news-item .news-content {
+            max-height: 70px;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .news-item.expanded .news-content {
+            max-height: 500px;
+        }
+
+        .news-item a.read-more {
             color: var(--color-accent);
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
+            display: inline-block;
+            cursor: pointer;
         }
 
-        .news-item a:hover {
+        .news-item a.read-more:hover {
             color: var(--color-text-light);
             text-decoration: underline;
         }
@@ -601,6 +652,13 @@
             max-width: 500px;
             margin: 0 auto;
             box-shadow: var(--shadow);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .login-container.granted {
+            transform: scale(0.95);
+            opacity: 0.8;
+            pointer-events: none;
         }
 
         .login-container h3 {
@@ -612,6 +670,7 @@
 
         .form-group {
             margin-bottom: 25px;
+            position: relative;
         }
 
         .form-group label {
@@ -621,7 +680,7 @@
             color: var(--color-text-light);
         }
 
-        .form-group input, .form-group textarea {
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%;
             padding: 15px;
             border: 2px solid var(--color-primary);
@@ -632,10 +691,33 @@
             transition: var(--transition);
         }
 
-        .form-group input:focus, .form-group textarea:focus {
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
             outline: none;
             border-color: var(--color-accent);
-            box-shadow: 0 0 0 3px rgba(164, 222, 2, 0.3);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 42px;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            cursor: pointer;
+            font-size: 1.2rem;
+            background: var(--color-primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .toggle-password:hover {
+            background: var(--color-primary-light);
         }
 
         .error-message {
@@ -662,6 +744,64 @@
             margin-right: 8px;
         }
 
+        /* Animación de acceso concedido */
+        .access-animation {
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 5;
+            stroke: var(--color-success);
+            stroke-miterlimit: 10;
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
+            margin: 0 auto;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        }
+
+        .checkmark-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 5;
+            stroke-miterlimit: 10;
+            stroke: var(--color-success);
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark-check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes scale {
+            0%, 100% {
+                transform: none;
+            }
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 30px rgba(46, 204, 113, 0.1);
+            }
+        }
+
         .calendar-container {
             margin-top: 60px;
         }
@@ -686,6 +826,15 @@
             font-weight: 600;
         }
 
+        .calendar-nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        .calendar-nav .btn {
+            padding: 10px 15px;
+        }
+
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -700,7 +849,7 @@
             transition: var(--transition);
             cursor: pointer;
             position: relative;
-            height: 80px;
+            height: 90px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -716,8 +865,11 @@
             font-weight: 600;
         }
 
-        .calendar-day.has-report:hover {
-            background: var(--color-primary-light);
+        .calendar-day.current-day {
+            background: var(--color-current-day);
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(58, 143, 183, 0.5);
         }
 
         .calendar-day .report-indicator {
@@ -731,7 +883,7 @@
         }
 
         .calendar-day .day-number {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
         }
 
@@ -748,7 +900,15 @@
             display: none;
         }
 
-        .calendar-day.has-report .report-title {
+        .calendar-day .report-time {
+            font-size: 0.65rem;
+            opacity: 0.8;
+            margin-top: 2px;
+            display: none;
+        }
+
+        .calendar-day.has-report .report-title,
+        .calendar-day.has-report .report-time {
             display: block;
         }
 
@@ -764,49 +924,116 @@
             margin-top: 60px;
         }
 
-        .reports-list h3 {
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            color: var(--color-text-light);
-        }
-
-        .report-item {
-            background: var(--color-card);
-            border-radius: var(--radius);
-            padding: 20px;
-            margin-bottom: 20px;
+        .reports-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .reports-header h3 {
+            font-size: 1.8rem;
+            color: var(--color-text-light);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .report-card {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .report-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .report-preview {
+            height: 180px;
+            background: var(--color-card-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .report-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
             transition: var(--transition);
         }
 
-        .report-item:hover {
-            background: var(--color-card-light);
-            transform: translateY(-3px);
+        .report-card:hover .report-preview img {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        .report-file-icon {
+            position: absolute;
+            font-size: 3rem;
+            color: var(--color-accent);
+            opacity: 0.8;
+        }
+
+        .report-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .report-info h4 {
             font-size: 1.2rem;
             margin-bottom: 10px;
             color: var(--color-text-light);
+            line-height: 1.3;
         }
 
-        .report-info p {
-            margin-bottom: 5px;
+        .report-date {
+            color: var(--color-accent);
             font-size: 0.9rem;
-            color: var(--color-text);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .report-description {
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            flex-grow: 1;
         }
 
         .report-actions {
             display: flex;
             gap: 10px;
+            margin-top: auto;
         }
 
         .report-actions .btn {
+            flex: 1;
+            text-align: center;
             padding: 10px 15px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         /* Formulario para subir informes */
@@ -832,12 +1059,42 @@
             margin-bottom: 20px;
         }
 
+        .time-input-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .time-input-container input {
+            flex: 1;
+        }
+
+        .time-period {
+            display: flex;
+            gap: 5px;
+        }
+
+        .time-period-btn {
+            padding: 10px;
+            background: var(--color-card-light);
+            border: 2px solid var(--color-primary);
+            border-radius: var(--radius);
+            color: var(--color-text);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .time-period-btn.active {
+            background: var(--color-primary);
+            color: white;
+        }
+
         .form-group textarea {
             min-height: 120px;
             resize: vertical;
         }
 
-        /* 7T Section */
+        /* Transformations Section */
         .tt-section {
             background: linear-gradient(to bottom, var(--color-dark) 0%, var(--color-darker) 100%);
             position: relative;
@@ -877,7 +1134,7 @@
         }
 
         .tt-card i {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 20px;
             background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
             -webkit-background-clip: text;
@@ -885,13 +1142,14 @@
         }
 
         .tt-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 15px;
             color: var(--color-text-light);
         }
 
         .tt-card p {
             line-height: 1.5;
+            font-size: 0.95rem;
         }
 
         .tt-card.t1 { border-color: #4CAF50; }
@@ -958,6 +1216,7 @@
 
         .footer-col ul li a i {
             color: var(--color-accent);
+            font-size: 0.9rem;
         }
 
         .footer-col ul li a:hover {
@@ -1016,22 +1275,7 @@
             color: var(--color-accent);
         }
 
-        /* Access Message */
-        .access-message {
-            text-align: center;
-            padding: 20px;
-            background: var(--color-primary);
-            border-radius: var(--radius);
-            margin-top: 20px;
-            display: none;
-        }
-
-        .access-message h4 {
-            color: white;
-            margin-bottom: 10px;
-        }
-
-        /* Estilos adicionales para mejor retroalimentación */
+        /* Upload Status */
         .upload-status {
             margin-top: 15px;
             padding: 10px;
@@ -1062,6 +1306,11 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes pulse {
@@ -1130,15 +1379,19 @@
 
             .calendar-day {
                 padding: 10px 2px;
-                height: 70px;
+                height: 80px;
             }
 
             .calendar-day .day-number {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             
             .section-title {
                 font-size: 2.2rem;
+            }
+
+            .reports-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1190,18 +1443,12 @@
             
             .calendar-day {
                 padding: 8px 2px;
-                height: 60px;
+                height: 70px;
                 font-size: 0.9rem;
             }
 
-            .report-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
             .report-actions {
-                margin-top: 15px;
-                align-self: flex-end;
+                flex-direction: column;
             }
 
             .calendar-header {
@@ -1219,6 +1466,18 @@
             
             .logo-text span {
                 font-size: 0.8rem;
+            }
+
+            .reports-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .filter-buttons {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
             }
         }
         
@@ -1255,6 +1514,20 @@
             .footer-grid {
                 gap: 30px;
             }
+
+            .report-actions {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
+
+            .calendar-day {
+                height: 60px;
+                padding: 5px 1px;
+            }
+
+            .calendar-day .day-number {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -1271,7 +1544,7 @@
                 <div class="logo-img">CS</div>
                 <div class="logo-text">
                     <h1>Caribe Sur</h1>
-                    <span>Guyana Esequiba</span>
+                    <span>¡Esequibo Hoy!</span>
                 </div>
             </div>
             <nav>
@@ -1282,12 +1555,12 @@
                     <li><a href="#inicio"><i class="fas fa-home"></i><span>Inicio</span></a></li>
                     <li><a href="#noticias"><i class="fas fa-newspaper"></i><span>Noticias</span></a></li>
                     <li><a href="#informes"><i class="fas fa-folder"></i><span>Informes</span></a></li>
-                    <li><a href="#tt"><i class="fas fa-globe-americas"></i><span>7T</span></a></li>
+                    <li><a href="#transformaciones"><i class="fas fa-globe-americas"></i><span>7T</span></a></li>
                     <li><a href="#contacto"><i class="fas fa-envelope"></i><span>Contacto</span></a></li>
                 </ul>
             </nav>
             <div class="auth-buttons">
-                <a href="#" class="btn btn-accent" id="loginBtn">Acceso Autoridades</a>
+                <a href="#informes" class="btn" id="loginBtn">Acceder</a>
             </div>
         </div>
     </header>
@@ -1300,7 +1573,7 @@
                 <h1 class="hero-title">Caribe Sur: Soberanía, Identidad y Transformación</h1>
                 <p class="hero-subtitle">Órgano oficial de Caribe Sur para la generación y difusión de informes estratégicos, análisis prospectivos y comunicación soberana.</p>
                 <div class="hero-buttons">
-                    <a href="#noticias" class="btn btn-hero btn-accent"><i class="fas fa-newspaper"></i> Ver Noticias</a>
+                    <a href="#noticias" class="btn btn-hero"><i class="fas fa-newspaper"></i> Ver Noticias</a>
                     <a href="#informes" class="btn btn-hero"><i class="fas fa-folder"></i> Acceder a Informes</a>
                 </div>
             </div>
@@ -1316,25 +1589,13 @@
                     <h3>Últimos videos de TikTok</h3>
                     <div class="tiktok-videos">
                         <div class="tiktok-video">
-                            <div class="tiktok-placeholder">
-                                <i class="fab fa-tiktok"></i>
-                                <p>Video 1 de Caribe Sur</p>
-                                <small>Próximamente: Integración con API de TikTok</small>
-                            </div>
+                            <iframe src="https://www.tiktok.com/embed/v2/7542126289927523589" frameborder="0" allowfullscreen></iframe>
                         </div>
                         <div class="tiktok-video">
-                            <div class="tiktok-placeholder">
-                                <i class="fab fa-tiktok"></i>
-                                <p>Video 2 de Caribe Sur</p>
-                                <small>Próximamente: Integración con API de TikTok</small>
-                            </div>
+                            <iframe src="https://www.tiktok.com/embed/v2/7540872086999321912" frameborder="0" allowfullscreen></iframe>
                         </div>
                         <div class="tiktok-video">
-                            <div class="tiktok-placeholder">
-                                <i class="fab fa-tiktok"></i>
-                                <p>Video 3 de Caribe Sur</p>
-                                <small>Próximamente: Integración con API de TikTok</small>
-                            </div>
+                            <iframe src="https://www.tiktok.com/embed/v2/7535225280516934917" frameborder="0" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -1344,21 +1605,30 @@
                     <div class="news-list">
                         <div class="news-item">
                             <span class="news-date">10 de Agosto, 2025</span>
-                            <h4>Venezuela fortalece presencia en Guyana Esequiba</h4>
-                            <p>El presidente Nicolás Maduro anuncia la creación de Caribe Sur para administrar el territorio y reafirmar la soberanía nacional.</p>
-                            <a href="#">Leer más →</a>
+                            <h4>Venezuela fortalece presencia en Guayana Esequiba</h4>
+                            <div class="news-content">
+                                <p>El presidente Nicolás Maduro anuncia la creación de Caribe Sur para administrar el territorio y reafirmar la soberanía nacional. Esta iniciativa representa un paso crucial en la defensa de nuestros derechos históricos sobre el territorio esequibo.</p>
+                                <p>La nueva entidad territorial contará con autoridades designadas y planes de desarrollo específicos para integrar plenamente la región al territorio nacional, garantizando servicios básicos, infraestructura y programas sociales para la población.</p>
+                            </div>
+                            <a class="read-more" onclick="toggleNews(this)">Leer más →</a>
                         </div>
                         <div class="news-item">
                             <span class="news-date">8 de Agosto, 2025</span>
                             <h4>Equipo Caribe Sur presenta informe sobre estrategia comunicacional para las 7T</h4>
-                            <p>El equipo de trabajo "Caribe Sur" ha desarrollado un modelo de acción estratégica para la difusión de las transformaciones del Gobierno Bolivariano.</p>
-                            <a href="#">Leer más →</a>
+                            <div class="news-content">
+                                <p>El equipo de trabajo "Caribe Sur" ha desarrollado un modelo de acción estratégica para la difusión de las transformaciones del Gobierno Bolivariano. Este plan incluye campañas informativas, contenidos multimedia y estrategias digitales para llegar a la población.</p>
+                                <p>El informe detalla cómo se implementarán las 7 Transformaciones en la región, con especial énfasis en la soberanía comunicacional y la creación de medios locales que reflejen la identidad venezolana de Guayana Esequiba.</p>
+                            </div>
+                            <a class="read-more" onclick="toggleNews(this)">Leer más →</a>
                         </div>
                         <div class="news-item">
                             <span class="news-date">5 de Agosto, 2025</span>
-                            <h4>Gran Misión Chamba Juvenil llega a Guyana Esequiba con 5.000 empleos</h4>
-                            <p>Como parte de la T4 Social, el Gobierno Bolivariano implementa programas de empleo juvenil en la región de Guyana Esequiba.</p>
-                            <a href="#">Leer más →</a>
+                            <h4>Gran Misión Chamba Juvenil llega a Guayana Esequiba con 5.000 empleos</h4>
+                            <div class="news-content">
+                                <p>Como parte de la T4 Social, el Gobierno Bolivariano implementa programas de empleo juvenil en la región de Guayana Esequiba. Esta iniciativa busca generar oportunidades laborales para jóvenes entre 18 y 35 años en diversos sectores productivos.</p>
+                                <p>Los empleos estarán distribuidos en áreas como agricultura, turismo, construcción y servicios tecnológicos, con salarios dignos y oportunidades de crecimiento profesional dentro de la administración pública y empresas estatales.</p>
+                            </div>
+                            <a class="read-more" onclick="toggleNews(this)">Leer más →</a>
                         </div>
                     </div>
                 </div>
@@ -1369,15 +1639,17 @@
     <!-- Reports Section -->
     <section id="informes" class="section reports-section">
         <div class="container">
-            <h2 class="section-title">Acceso a Informes</h2>
+            <h2 class="section-title">Informes</h2>
             
-            <div class="login-container">
+            <div class="login-container" id="loginContainer">
                 <h3>Acceso para Autoridades</h3>
                 <form id="loginForm">
                     <div class="form-group">
                         <label for="code">Código de Acceso Especial</label>
-                        <input type="text" id="code" placeholder="Ingrese el código de acceso" required>
-                        <small>Ingrese "admin" para acceder</small>
+                        <input type="password" id="code" placeholder="Ingrese el código de acceso" required>
+                        <button type="button" class="toggle-password" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
                     </div>
                     <button type="submit" class="btn" style="width: 100%"><i class="fas fa-lock"></i> Acceder</button>
                     
@@ -1386,16 +1658,29 @@
                     </div>
                 </form>
                 
-                <div class="access-message" id="accessMessage">
-                    <h4><i class="fas fa-check-circle"></i> Acceso concedido</h4>
+                <div class="access-animation" id="accessAnimation">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                    <h4 style="margin-top: 20px; color: var(--color-success);">Acceso concedido</h4>
                     <p>Bienvenido al panel de administración de informes.</p>
                 </div>
             </div>
 
             <!-- Informes y Análisis -->
             <div class="reports-list" id="reportsList" style="display: none;">
-                <h3>Informes y Análisis Disponibles</h3>
-                <!-- Los informes se cargarán dinámicamente aquí -->
+                <div class="reports-header">
+                    <h3>Informes y Análisis Disponibles</h3>
+                    <div class="filter-buttons">
+                        <button class="btn btn-filter btn-small active" id="sortNewest"><i class="fas fa-sort-amount-down"></i> Más recientes</button>
+                        <button class="btn btn-filter btn-small" id="sortOldest"><i class="fas fa-sort-amount-up"></i> Más antiguos</button>
+                        <button class="btn btn-filter btn-small" id="sortTitle"><i class="fas fa-font"></i> Por título</button>
+                    </div>
+                </div>
+                <div class="reports-grid" id="reportsGrid">
+                    <!-- Los informes se cargarán dinámicamente aquí -->
+                </div>
             </div>
 
             <!-- Formulario para subir informes -->
@@ -1412,23 +1697,29 @@
                             <input type="date" id="reportDate" required>
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reportTime">Hora</label>
+                            <div class="time-input-container">
+                                <input type="time" id="reportTime" required>
+                                <div class="time-period">
+                                    <button type="button" class="time-period-btn active" data-period="am">a. m.</button>
+                                    <button type="button" class="time-period-btn" data-period="pm">p. m.</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="reportFile">Archivo (PDF)</label>
+                            <input type="file" id="reportFile" accept=".pdf" required>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="reportDescription">Descripción</label>
                         <textarea id="reportDescription" required></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="reportFile">Archivo (PDF)</label>
-                        <input type="file" id="reportFile" accept=".pdf" required>
-                    </div>
                     <button type="submit" class="btn" style="width: 100%"><i class="fas fa-cloud-upload-alt"></i> Subir Informe</button>
                 </form>
                 <div class="upload-status" id="uploadStatus"></div>
-                <div class="success-message" id="uploadSuccessMessage">
-                    <i class="fas fa-check-circle"></i> Informe subido correctamente.
-                </div>
-                <div class="error-message" id="uploadErrorMessage">
-                    <i class="fas fa-exclamation-circle"></i> Error al subir el informe. Intente nuevamente.
-                </div>
             </div>
 
             <!-- Botón para mostrar formulario de subida -->
@@ -1441,9 +1732,9 @@
                 <div class="calendar">
                     <div class="calendar-header">
                         <h3 id="currentMonth">Agosto 2025</h3>
-                        <div>
-                            <button class="btn btn-accent btn-small" id="prevMonth"><i class="fas fa-chevron-left"></i> Anterior</button>
-                            <button class="btn btn-small" id="nextMonth">Siguiente <i class="fas fa-chevron-right"></i></button>
+                        <div class="calendar-nav">
+                            <button class="btn btn-accent btn-small" id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn btn-small" id="nextMonth"><i class="fas fa-chevron-right"></i></button>
                         </div>
                     </div>
                     <div class="calendar-grid" id="calendarGrid">
@@ -1462,25 +1753,51 @@
             <div class="territory-content">
                 <div class="territory-text">
                     <h3>Nuestra Soberanía</h3>
-                    <p>Guyana Esequiba representa para Venezuela no sólo un territorio de 159.500 km², sino la materialización de nuestra soberanía y autodeterminación como pueblo libre. Desde el Acuerdo de Ginebra de 1966, Venezuela ha mantenido una posición firme y diplomática en la defensa de sus derechos territoriales.</p>
+                    <p>Guayana Esequiba representa para Venezuela no sólo un territorio de 159.500 km², sino la materialización de nuestra soberanía y autodeterminación como pueblo libre. Desde el Acuerdo de Ginebra de 1966, Venezuela ha mantenido una posición firme y diplomática en la defensa de sus derechos territoriales.</p>
                     <p>La creación de Caribe Sur refuerza el compromiso del Gobierno Bolivariano con la recuperación pacífica de este territorio, mediante el diálogo y el derecho internacional.</p>
-                    <a href="#" class="btn"><i class="fas fa-book"></i> Conocer más sobre nuestra historia</a>
                 </div>
                 <div class="map-container">
-                    <div class="map-placeholder">
-                        <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-bottom: 20px;"></i><br>
-                        Mapa Interactivo del Territorio Guyana Esequiba<br>
-                        (Visualización en tiempo real)
+                    <div class="image-carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item">
+                                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><rect width='400' height='400' fill='%232A7D4A'/><text x='200' y='200' font-family='Arial' font-size='24' fill='white' text-anchor='middle'>Mapa Territorial</text></svg>" alt="Mapa Territorial" class="carousel-image">
+                                <div class="carousel-overlay">
+                                    <h4>Territorio Esequibo</h4>
+                                    <p>Territorio Venezolano</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><rect width='400' height='400' fill='%232E86AB'/><text x='200' y='200' font-family='Arial' font-size='24' fill='white' text-anchor='middle'>Recursos Naturales</text></svg>" alt="Recursos Naturales" class="carousel-image">
+                                <div class="carousel-overlay">
+                                    <h4>Recursos Naturales</h4>
+                                    <p>Biodiversidad y minerales</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><rect width='400' height='400' fill='%231E5631'/><text x='200' y='200' font-family='Arial' font-size='24' fill='white' text-anchor='middle'>Cultura Local</text></svg>" alt="Cultura Local" class="carousel-image">
+                                <div class="carousel-overlay">
+                                    <h4>Cultura Local</h4>
+                                    <p>Patrimonio cultural venezolano</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'><rect width='400' height='400' fill='%230A1A2A'/><text x='200' y='200' font-family='Arial' font-size='24' fill='white' text-anchor='middle'>Desarrollo Social</text></svg>" alt="Desarrollo Social" class="carousel-image">
+                                <div class="carousel-overlay">
+                                    <h4>Desarrollo Social</h4>
+                                    <p>Inversión en comunidades</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 7T Section -->
-    <section id="tt" class="section tt-section">
+    <!-- Transformations Section -->
+    <section id="transformaciones" class="section tt-section">
         <div class="container">
-            <h2 class="section-title">7T - Transformaciones del Territorio Guyana Esequiba</h2>
+            <h2 class="section-title">Transformaciones del Territorio Guayana Esequiba</h2>
             <div class="tt-grid">
                 <div class="card tt-card t1">
                     <i class="fas fa-chart-line"></i>
@@ -1500,7 +1817,7 @@
                 <div class="card tt-card t4">
                     <i class="fas fa-users"></i>
                     <h3>T4 Social</h3>
-                    <p>Universalización de derechos y justicia distributiva para el bienestar colectivo del pueblo venezolano.</p>
+                    <p>Universalización de derechos and justicia distributiva para el bienestar colectivo del pueblo venezolano.</p>
                 </div>
                 <div class="card tt-card t5">
                     <i class="fas fa-balance-scale"></i>
@@ -1527,7 +1844,7 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <h3>Caribe Sur</h3>
-                    <p>Órgano administrativo para la gestión del territorio Guyana Esequiba y la defensa de la soberanía nacional.</p>
+                    <p>Órgano administrativo para la gestión del territorio Guayana Esequiba y la defensa de la soberanía nacional.</p>
                     <p>"Comunicación al servicio de la Patria, con la verdad como bandera y la eficacia como método."</p>
                 </div>
                 <div class="footer-col">
@@ -1536,16 +1853,7 @@
                         <li><a href="#inicio"><i class="fas fa-chevron-right"></i> Inicio</a></li>
                         <li><a href="#noticias"><i class="fas fa-chevron-right"></i> Noticias</a></li>
                         <li><a href="#informes"><i class="fas fa-chevron-right"></i> Informes</a></li>
-                        <li><a href="#tt"><i class="fas fa-chevron-right"></i> 7T</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Recursos</h3>
-                    <ul>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Biblioteca Digital</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Documentos Históricos</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Mapas y Cartografía</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Informes Especiales</a></li>
+                        <li><a href="#transformaciones"><i class="fas fa-chevron-right"></i> Transformaciones</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -1553,7 +1861,15 @@
                     <ul>
                         <li><a href="#"><i class="fas fa-envelope"></i> caribesur@gmail.com</a></li>
                         <li><a href="#"><i class="fas fa-phone"></i> +58 412 1234567</a></li>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Guyana Esequiba - Venezuela</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Guayana Esequiba - Venezuela</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Redes Sociales</h3>
+                    <ul>
+                        <li><a href="https://www.tiktok.com/@karibesur" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
                     </ul>
                 </div>
             </div>
@@ -1562,22 +1878,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Vista Previa Modal -->
-    <div class="modal" id="previewModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closePreviewModal">&times;</button>
-            <h3 id="previewTitle">Vista Previa del Informe</h3>
-            <div style="height: 400px; background: #f0f0f0; display: flex; justify-content: center; align-items: center; margin: 20px 0; border-radius: 8px;">
-                <div style="text-align: center; color: #333;">
-                    <i class="fas fa-file-pdf" style="font-size: 3rem; margin-bottom: 15px; color: #e74c3c;"></i>
-                    <p>Vista previa del documento PDF</p>
-                    <small>En un entorno real, aquí se mostraría el contenido del informe</small>
-                </div>
-            </div>
-            <button class="btn download-report" style="width: 100%"><i class="fas fa-download"></i> Descargar Documento</button>
-        </div>
-    </div>
 
     <!-- Report Detail Modal -->
     <div class="modal" id="reportModal">
@@ -1591,14 +1891,28 @@
     </div>
     <script>
         // URL del script de Apps Script (reemplazar con tu URL real)
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw6V2P-PVjf1ieZsvoy2QlE4hWpbHFcz_965hr9fesbY_scoQGJdWFzVQw-iiXGK91T/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxyk122iq9VIfGCSaLnuRpn0bR-WTnPS1xGrR0Db7TiBWtaWTjnQRQciJnyBvlrSu_v/exec';
         
         // Variable para almacenar los informes reales
         let reportData = {};
+        let allReports = [];
 
         // Variables para el control del calendario
         let currentDate = new Date();
         const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        const dayNames = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+
+        // Función para expandir/contraer noticias
+        function toggleNews(element) {
+            const newsItem = element.parentElement;
+            newsItem.classList.toggle('expanded');
+            
+            if (newsItem.classList.contains('expanded')) {
+                element.textContent = 'Leer menos ←';
+            } else {
+                element.textContent = 'Leer más →';
+            }
+        }
 
         // Crear partículas para el fondo
         function createParticles() {
@@ -1627,6 +1941,70 @@
             }
         }
         
+        // Función para formatear fecha correctamente
+        function formatDisplayDate(dateString) {
+            try {
+                const date = new Date(dateString);
+                if (isNaN(date.getTime())) {
+                    // Si no es una fecha válida, intentar parsear manualmente
+                    const parts = dateString.split(' ');
+                    if (parts.length >= 3) {
+                        const datePart = parts[0];
+                        const timePart = parts[1] + ' ' + parts[2];
+                        
+                        const [day, month, year] = datePart.split('/');
+                        const [time, period] = timePart.split(' ');
+                        let [hours, minutes] = time.split(':');
+                        
+                        // Convertir a formato 24h
+                        if (period === 'p.m.' && hours < 12) {
+                            hours = parseInt(hours) + 12;
+                        } else if (period === 'a.m.' && hours == 12) {
+                            hours = 0;
+                        }
+                        
+                        const formattedDate = new Date(year, month - 1, day, hours, minutes);
+                        return formattedDate.toLocaleDateString('es-ES', { 
+                            weekday: 'long', 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric',
+                            hour: 'numeric',
+                            minute: 'numeric',
+                            hour12: true 
+                        });
+                    }
+                    return "Fecha inválida";
+                }
+                
+                return date.toLocaleDateString('es-ES', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true 
+                });
+            } catch (error) {
+                console.error("Error formateando fecha:", error, dateString);
+                return "Fecha inválida";
+            }
+        }
+
+        // Función para formatear hora
+        function formatTime(timeString) {
+            if (!timeString) return '';
+            
+            // Convertir formato 24h a 12h
+            const [hours, minutes] = timeString.split(':');
+            let h = parseInt(hours);
+            const period = h >= 12 ? 'p. m.' : 'a. m.';
+            h = h % 12 || 12;
+            
+            return `${h}:${minutes} ${period}`;
+        }
+
         // Función para cargar informes desde Google Sheets
         async function loadReportsFromSheets() {
             try {
@@ -1636,29 +2014,65 @@
                 if (data.success && data.reports) {
                     // Reiniciar reportData
                     reportData = {};
+                    allReports = data.reports;
                     
                     // Procesar cada informe
                     data.reports.forEach(report => {
                         // Convertir fecha al formato YYYY-MM-DD para usar como clave
                         const dateObj = new Date(report.date);
-                        const formattedDate = `${dateObj.getFullYear()}-${String(dateObj.getMonth() + 1).padStart(2, '0')}-${String(dateObj.getDate()).padStart(2, '0')}`;
-                        
-                        // Almacenar el informe
-                        reportData[formattedDate] = {
-                            title: report.title,
-                            description: report.description,
-                            fileUrl: report.url,
-                            date: report.date
-                        };
+                        // Si la fecha es inválida, intentar parsear manualmente
+                        if (isNaN(dateObj.getTime())) {
+                            // Asumir formato dd/MM/yyyy hh:mm a. m./p. m.
+                            const parts = report.date.split(' ');
+                            if (parts.length >= 3) {
+                                const datePart = parts[0];
+                                const timePart = parts[1] + ' ' + parts[2];
+                                
+                                const [day, month, year] = datePart.split('/');
+                                const [time, period] = timePart.split(' ');
+                                let [hours, minutes] = time.split(':');
+                                
+                                // Convertir a formato 24h
+                                if (period === 'p.m.' && hours < 12) {
+                                    hours = parseInt(hours) + 12;
+                                } else if (period === 'a.m.' && hours == 12) {
+                                    hours = 0;
+                                }
+                                
+                                const formattedDate = new Date(year, month - 1, day, hours, minutes);
+                                const formattedDateStr = `${formattedDate.getFullYear()}-${String(formattedDate.getMonth() + 1).padStart(2, '0')}-${String(formattedDate.getDate()).padStart(2, '0')}`;
+                                
+                                // Almacenar el informe
+                                reportData[formattedDateStr] = {
+                                    title: report.title,
+                                    description: report.description,
+                                    fileUrl: report.url,
+                                    date: formattedDate.toISOString(),
+                                    time: `${String(hours).padStart(2, '0')}:${minutes}`
+                                };
+                            }
+                        } else {
+                            const formattedDate = `${dateObj.getFullYear()}-${String(dateObj.getMonth() + 1).padStart(2, '0')}-${String(dateObj.getDate()).padStart(2, '0')}`;
+                            
+                            // Almacenar el informe
+                            reportData[formattedDate] = {
+                                title: report.title,
+                                description: report.description,
+                                fileUrl: report.url,
+                                date: report.date,
+                                time: report.time || "12:00" // Hora por defecto si no existe
+                            };
+                        }
                     });
                     
                     // Actualizar la interfaz
-                    updateReportsList(data.reports);
+                    updateReportsList(allReports);
                     generateCalendar();
                 } else {
                     console.error('Error al cargar informes:', data.message);
                     // Inicializar con objeto vacío si no hay informes
                     reportData = {};
+                    allReports = [];
                     updateReportsList([]);
                     generateCalendar();
                 }
@@ -1666,6 +2080,7 @@
                 console.error('Error al cargar informes:', error);
                 // Inicializar con objeto vacío en caso de error
                 reportData = {};
+                allReports = [];
                 updateReportsList([]);
                 generateCalendar();
             }
@@ -1673,78 +2088,89 @@
 
         // Función para actualizar la lista de informes en la interfaz
         function updateReportsList(reports) {
-            const reportsList = document.getElementById('reportsList');
+            const reportsGrid = document.getElementById('reportsGrid');
             
-            // Limpiar lista actual (excepto el título)
-            const titleElement = reportsList.querySelector('h3');
-            reportsList.innerHTML = '';
-            reportsList.appendChild(titleElement);
+            // Limpiar grid actual
+            reportsGrid.innerHTML = '';
             
             if (reports.length === 0) {
                 // Mostrar mensaje si no hay informes
                 const noReportsMsg = document.createElement('div');
-                noReportsMsg.className = 'report-item';
+                noReportsMsg.className = 'no-reports';
                 noReportsMsg.innerHTML = `
-                    <div class="report-info">
+                    <div style="text-align: center; padding: 40px; grid-column: 1 / -1;">
+                        <i class="fas fa-file-alt" style="font-size: 3rem; color: var(--color-text); margin-bottom: 15px;"></i>
                         <h4>No hay informes disponibles</h4>
                         <p>Utilice el formulario de subida para agregar nuevos informes.</p>
                     </div>
                 `;
-                reportsList.appendChild(noReportsMsg);
+                reportsGrid.appendChild(noReportsMsg);
                 return;
             }
             
-            // Agregar cada informe a la lista
+            // Agregar cada informe a la grid
             reports.forEach(report => {
-                const reportItem = document.createElement('div');
-                reportItem.className = 'report-item';
-                reportItem.innerHTML = `
+                const formattedDate = formatDisplayDate(report.date);
+                const formattedTime = report.time ? formatTime(report.time) : '';
+                
+                const reportCard = document.createElement('div');
+                reportCard.className = 'report-card';
+                reportCard.innerHTML = `
+                    <div class="report-preview">
+                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #1a2e3f;">
+                            <i class="report-file-icon fas fa-file-pdf"></i>
+                        </div>
+                    </div>
                     <div class="report-info">
                         <h4>${report.title}</h4>
-                        <p><strong>Fecha:</strong> ${formatDisplayDate(report.date)}</p>
-                        <p><strong>Descripción:</strong> ${report.description}</p>
-                    </div>
-                    <div class="report-actions">
-                        <button class="btn btn-accent btn-small view-report" data-title="${report.title}"><i class="fas fa-eye"></i> Vista Previa</button>
-                        <button class="btn btn-small download-report" data-url="${report.url}"><i class="fas fa-download"></i> Descargar</button>
+                        <div class="report-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            ${formattedDate}
+                        </div>
+                        <p class="report-description">${report.description}</p>
+                        <div class="report-actions">
+                            <button class="btn btn-small open-report" data-url="${report.url}"><i class="fas fa-external-link-alt"></i> Abrir</button>
+                            <button class="btn btn-accent btn-small download-report" data-url="${report.url}" data-filename="${report.title}.pdf"><i class="fas fa-download"></i> Descargar</button>
+                        </div>
                     </div>
                 `;
-                reportsList.appendChild(reportItem);
+                reportsGrid.appendChild(reportCard);
             });
             
             // Reasignar event listeners a los botones
             reassignReportEventListeners();
         }
 
-        // Función para formatear fecha para mostrar
-        function formatDisplayDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-        }
-
         // Función para reasignar event listeners a los botones de informes
         function reassignReportEventListeners() {
-            // Vista previa de informes
-            const viewReportButtons = document.querySelectorAll('.view-report');
-            const previewModal = document.getElementById('previewModal');
-            const closePreviewModal = document.getElementById('closePreviewModal');
-            const previewTitle = document.getElementById('previewTitle');
-
-            viewReportButtons.forEach(button => {
+            // Abrir informes en nueva pestaña
+            const openButtons = document.querySelectorAll('.open-report');
+            openButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    const title = button.getAttribute('data-title');
-                    previewTitle.textContent = title;
-                    previewModal.style.display = 'flex';
+                    const fileUrl = button.getAttribute('data-url');
+                    if (fileUrl) {
+                        window.open(fileUrl, '_blank');
+                    } else {
+                        alert('No hay archivo disponible para abrir.');
+                    }
                 });
             });
 
             // Descargar informes
             const downloadButtons = document.querySelectorAll('.download-report');
             downloadButtons.forEach(button => {
-                button.addEventListener('click', (e) => {
+                button.addEventListener('click', () => {
                     const fileUrl = button.getAttribute('data-url');
+                    const filename = button.getAttribute('data-filename') || 'documento.pdf';
+                    
                     if (fileUrl) {
-                        window.open(fileUrl, '_blank');
+                        // Crear enlace temporal para descarga
+                        const link = document.createElement('a');
+                        link.href = fileUrl;
+                        link.setAttribute('download', filename);
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
                     } else {
                         alert('No hay archivo disponible para descargar.');
                     }
@@ -1786,6 +2212,10 @@
                 calendarGrid.appendChild(emptyDay);
             }
             
+            // Obtener fecha actual para marcar el día actual
+            const today = new Date();
+            const isCurrentMonth = today.getMonth() === currentDate.getMonth() && today.getFullYear() === currentDate.getFullYear();
+            
             // Añadir los días del mes
             for (let day = 1; day <= daysInMonth; day++) {
                 const dayElement = document.createElement('div');
@@ -1794,6 +2224,11 @@
                 // Formatear la fecha para comparar
                 const dateStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                 
+                // Verificar si es el día actual
+                if (isCurrentMonth && day === today.getDate()) {
+                    dayElement.classList.add('current-day');
+                }
+                
                 // Verificar si hay un informe para este día
                 if (reportData[dateStr]) {
                     dayElement.classList.add('has-report');
@@ -1801,6 +2236,7 @@
                         <div class="day-number">${day}</div>
                         <div class="report-indicator"></div>
                         <div class="report-title">${reportData[dateStr].title}</div>
+                        <div class="report-time">${formatTime(reportData[dateStr].time)}</div>
                     `;
                     
                     // Añadir evento para mostrar detalles
@@ -1845,10 +2281,35 @@
                 <p><strong>Fecha:</strong> ${formatDisplayDate(report.date)}</p>
                 <p><strong>Descripción:</strong> ${report.description}</p>
                 <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
-                    <button class="btn btn-accent view-report" data-title="${report.title}" style="flex: 1; min-width: 140px;"><i class="fas fa-eye"></i> Vista Previa</button>
-                    <button class="btn download-report" data-url="${report.fileUrl}" style="flex: 1; min-width: 140px;"><i class="fas fa-download"></i> Descargar</button>
+                    <button class="btn open-report" data-url="${report.fileUrl}" style="flex: 1; min-width: 140px;"><i class="fas fa-external-link-alt"></i> Abrir</button>
+                    <button class="btn btn-accent download-report" data-url="${report.fileUrl}" data-filename="${report.title}.pdf" style="flex: 1; min-width: 140px;"><i class="fas fa-download"></i> Descargar</button>
                 </div>
             `;
+            
+            // Añadir event listeners a los botones
+            const openBtn = content.querySelector('.open-report');
+            const downloadBtn = content.querySelector('.download-report');
+            
+            openBtn.addEventListener('click', () => {
+                if (report.fileUrl) {
+                    window.open(report.fileUrl, '_blank');
+                } else {
+                    alert('No hay archivo disponible para abrir.');
+                }
+            });
+            
+            downloadBtn.addEventListener('click', () => {
+                if (report.fileUrl) {
+                    const link = document.createElement('a');
+                    link.href = report.fileUrl;
+                    link.setAttribute('download', report.title + '.pdf');
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                } else {
+                    alert('No hay archivo disponible para descargar.');
+                }
+            });
             
             modal.style.display = 'flex';
         }
@@ -1860,17 +2321,13 @@
             statusElement.className = `upload-status ${type}`;
             statusElement.style.display = 'block';
             
-            // Ocultar otros mensajes
-            document.getElementById('uploadSuccessMessage').style.display = 'none';
-            document.getElementById('uploadErrorMessage').style.display = 'none';
-        }
-        
-        function hideUploadStatus() {
-            document.getElementById('uploadStatus').style.display = 'none';
+            setTimeout(() => {
+                statusElement.style.display = 'none';
+            }, 3000);
         }
         
         // Subir informe a Google Drive mediante Apps Script
-        async function uploadReportToDrive(title, date, description, file) {
+        async function uploadReportToDrive(title, date, time, description, file) {
             try {
                 // Mostrar indicador de carga
                 const uploadForm = document.getElementById('reportUploadForm');
@@ -1888,6 +2345,7 @@
                     const formData = new FormData();
                     formData.append('title', title);
                     formData.append('date', date);
+                    formData.append('time', time);
                     formData.append('description', description);
                     formData.append('file', base64Content);
                     formData.append('filename', file.name);
@@ -1910,7 +2368,6 @@
                             // Ocultar formulario después de 2 segundos
                             setTimeout(() => {
                                 document.getElementById('uploadForm').style.display = 'none';
-                                hideUploadStatus();
                             }, 2000);
                         } else {
                             throw new Error(data.message);
@@ -2002,6 +2459,20 @@
                 });
             });
             
+            // Toggle password visibility
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('code');
+            
+            togglePassword.addEventListener('click', function() {
+                // Cambiar el tipo de input
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                
+                // Cambiar el icono
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+            
             // Navegación del calendario
             document.getElementById('prevMonth').addEventListener('click', () => {
                 currentDate.setMonth(currentDate.getMonth() - 1);
@@ -2022,10 +2493,11 @@
                     
                     if (code === 'admin') {
                         // Acceso concedido
+                        document.getElementById('loginContainer').classList.add('granted');
                         document.getElementById('calendarSection').style.display = 'block';
                         document.getElementById('reportsList').style.display = 'block';
                         document.getElementById('uploadButtonContainer').style.display = 'block';
-                        document.getElementById('accessMessage').style.display = 'block';
+                        document.getElementById('accessAnimation').style.display = 'block';
                         document.getElementById('errorMessage').style.display = 'none';
                         
                         // Cargar informes reales desde Google Sheets
@@ -2048,6 +2520,13 @@
             if (showUploadForm && uploadForm) {
                 showUploadForm.addEventListener('click', () => {
                     uploadForm.style.display = uploadForm.style.display === 'none' ? 'block' : 'none';
+                    
+                    // Resetear fecha al día actual si no hay fecha seleccionada
+                    if (!document.getElementById('reportDate').value) {
+                        const today = new Date();
+                        const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+                        document.getElementById('reportDate').value = formattedDate;
+                    }
                 });
             }
             
@@ -2059,8 +2538,29 @@
                     
                     const title = document.getElementById('reportTitle').value;
                     const date = document.getElementById('reportDate').value;
+                    let time = document.getElementById('reportTime').value;
                     const description = document.getElementById('reportDescription').value;
                     const fileInput = document.getElementById('reportFile');
+                    
+                    // Obtener período (AM/PM)
+                    const activePeriod = document.querySelector('.time-period-btn.active');
+                    const period = activePeriod ? activePeriod.getAttribute('data-period') : 'am';
+                    
+                    // Convertir hora a formato 12h con período
+                    if (time) {
+                        const [hours, minutes] = time.split(':');
+                        let h = parseInt(hours);
+                        
+                        if (period === 'pm' && h < 12) {
+                            h += 12;
+                        } else if (period === 'am' && h === 12) {
+                            h = 0;
+                        }
+                        
+                        time = `${String(h).padStart(2, '0')}:${minutes}`;
+                    } else {
+                        time = '12:00';
+                    }
                     
                     if (fileInput.files.length === 0) {
                         showUploadStatus('Por favor, seleccione un archivo PDF', 'error');
@@ -2076,27 +2576,7 @@
                     }
                     
                     // Subir el archivo
-                    await uploadReportToDrive(title, date, description, file);
-                });
-            }
-            
-            // Vista previa de informes
-            const viewReportButtons = document.querySelectorAll('.view-report');
-            const previewModal = document.getElementById('previewModal');
-            const closePreviewModal = document.getElementById('closePreviewModal');
-            const previewTitle = document.getElementById('previewTitle');
-            
-            viewReportButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const title = button.getAttribute('data-title');
-                    previewTitle.textContent = title;
-                    previewModal.style.display = 'flex';
-                });
-            });
-            
-            if (closePreviewModal && previewModal) {
-                closePreviewModal.addEventListener('click', () => {
-                    previewModal.style.display = 'none';
+                    await uploadReportToDrive(title, date, time, description, file);
                 });
             }
             
@@ -2112,9 +2592,6 @@
             
             // Cerrar modales al hacer clic fuera
             window.addEventListener('click', (e) => {
-                if (e.target === previewModal) {
-                    previewModal.style.display = 'none';
-                }
                 if (e.target === reportModal) {
                     reportModal.style.display = 'none';
                 }
@@ -2134,6 +2611,41 @@
                             block: 'start'
                         });
                     }
+                });
+            });
+            
+            // Filtros de informes
+            const filterButtons = document.querySelectorAll('.btn-filter');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remover clase active de todos los botones
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Agregar clase active al botón clickeado
+                    this.classList.add('active');
+                    
+                    // Ordenar informes según el filtro seleccionado
+                    let sortedReports = [...allReports];
+                    
+                    if (this.id === 'sortNewest') {
+                        sortedReports.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    } else if (this.id === 'sortOldest') {
+                        sortedReports.sort((a, b) => new Date(a.date) - new Date(b.date));
+                    } else if (this.id === 'sortTitle') {
+                        sortedReports.sort((a, b) => a.title.localeCompare(b.title));
+                    }
+                    
+                    updateReportsList(sortedReports);
+                });
+            });
+            
+            // Selector de período de tiempo (AM/PM)
+            const timePeriodButtons = document.querySelectorAll('.time-period-btn');
+            timePeriodButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    timePeriodButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
                 });
             });
         });
