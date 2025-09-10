@@ -20,6 +20,7 @@
             --color-card: #132C3D;
             --color-card-light: #1C3E56;
             --color-error: #e74c3c;
+            --color-success: #2ecc71;
             --font-main: 'Montserrat', sans-serif;
             --font-heading: 'Playfair Display', serif;
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -567,11 +568,25 @@
             font-size: 1.1rem;
             margin-bottom: 10px;
             color: var(--color-text-light);
+            line-height: 1.3;
         }
 
         .news-item p {
             margin-bottom: 15px;
             font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .news-item a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .news-item a:hover {
+            color: var(--color-text-light);
+            text-decoration: underline;
         }
 
         /* Reports Section */
@@ -606,7 +621,7 @@
             color: var(--color-text-light);
         }
 
-        .form-group input {
+        .form-group input, .form-group textarea {
             width: 100%;
             padding: 15px;
             border: 2px solid var(--color-primary);
@@ -617,7 +632,7 @@
             transition: var(--transition);
         }
 
-        .form-group input:focus {
+        .form-group input:focus, .form-group textarea:focus {
             outline: none;
             border-color: var(--color-accent);
             box-shadow: 0 0 0 3px rgba(164, 222, 2, 0.3);
@@ -633,7 +648,17 @@
             display: none;
         }
 
-        .error-message i {
+        .success-message {
+            color: var(--color-success);
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(46, 204, 113, 0.1);
+            border-radius: var(--radius);
+            display: none;
+        }
+
+        .error-message i, .success-message i {
             margin-right: 8px;
         }
 
@@ -658,6 +683,7 @@
         .calendar-header h3 {
             color: var(--color-text-light);
             font-size: 1.5rem;
+            font-weight: 600;
         }
 
         .calendar-grid {
@@ -710,7 +736,6 @@
         }
 
         .calendar-day .report-title {
-            display: none;
             font-size: 0.7rem;
             text-align: center;
             padding: 2px;
@@ -720,6 +745,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            display: none;
         }
 
         .calendar-day.has-report .report-title {
@@ -807,22 +833,8 @@
         }
 
         .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid var(--color-primary);
-            border-radius: var(--radius);
-            background: var(--color-card-light);
-            color: var(--color-text);
-            font-size: 1rem;
-            transition: var(--transition);
             min-height: 120px;
             resize: vertical;
-        }
-
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--color-accent);
-            box-shadow: 0 0 0 3px rgba(164, 222, 2, 0.3);
         }
 
         /* 7T Section */
@@ -878,6 +890,10 @@
             color: var(--color-text-light);
         }
 
+        .tt-card p {
+            line-height: 1.5;
+        }
+
         .tt-card.t1 { border-color: #4CAF50; }
         .tt-card.t2 { border-color: #2196F3; }
         .tt-card.t3 { border-color: #3F51B5; }
@@ -920,6 +936,7 @@
 
         .footer-col p {
             margin-bottom: 20px;
+            line-height: 1.5;
         }
 
         .footer-col ul {
@@ -1014,6 +1031,27 @@
             margin-bottom: 10px;
         }
 
+        /* Estilos adicionales para mejor retroalimentación */
+        .upload-status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: var(--radius);
+            text-align: center;
+            display: none;
+        }
+        
+        .upload-status.success {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--color-success);
+            border: 1px solid var(--color-success);
+        }
+        
+        .upload-status.error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--color-error);
+            border: 1px solid var(--color-error);
+        }
+
         /* Animaciones adicionales */
         @keyframes fadeInUp {
             from {
@@ -1034,6 +1072,41 @@
 
         .pulse {
             animation: pulse 2s infinite;
+        }
+
+        .uploading {
+            position: relative;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .uploading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: var(--radius);
+        }
+        
+        .upload-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--color-accent);
+            animation: spin 1s ease-in-out infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -20px;
+            margin-left: -20px;
+            z-index: 10;
         }
 
         /* Responsive */
@@ -1198,7 +1271,7 @@
                 <div class="logo-img">CS</div>
                 <div class="logo-text">
                     <h1>Caribe Sur</h1>
-                    <span>Gobernación del Esequibo</span>
+                    <span>Guyana Esequiba</span>
                 </div>
             </div>
             <nav>
@@ -1225,7 +1298,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">Caribe Sur: Soberanía, Identidad y Transformación</h1>
-                <p class="hero-subtitle">Órgano oficial de la Gobernación del Esequibo Venezolano para la generación y difusión de informes estratégicos, análisis prospectivos y comunicación soberana.</p>
+                <p class="hero-subtitle">Órgano oficial de Caribe Sur para la generación y difusión de informes estratégicos, análisis prospectivos y comunicación soberana.</p>
                 <div class="hero-buttons">
                     <a href="#noticias" class="btn btn-hero btn-accent"><i class="fas fa-newspaper"></i> Ver Noticias</a>
                     <a href="#informes" class="btn btn-hero"><i class="fas fa-folder"></i> Acceder a Informes</a>
@@ -1271,8 +1344,8 @@
                     <div class="news-list">
                         <div class="news-item">
                             <span class="news-date">10 de Agosto, 2025</span>
-                            <h4>Venezuela fortalece presencia en el Esequibo con nueva gobernación</h4>
-                            <p>El presidente Nicolás Maduro anuncia la creación de la Gobernación del Esequibo Venezolano para administrar el territorio y reafirmar la soberanía nacional.</p>
+                            <h4>Venezuela fortalece presencia en Guyana Esequiba</h4>
+                            <p>El presidente Nicolás Maduro anuncia la creación de Caribe Sur para administrar el territorio y reafirmar la soberanía nacional.</p>
                             <a href="#">Leer más →</a>
                         </div>
                         <div class="news-item">
@@ -1283,8 +1356,8 @@
                         </div>
                         <div class="news-item">
                             <span class="news-date">5 de Agosto, 2025</span>
-                            <h4>Gran Misión Chamba Juvenil llega al Esequibo con 5.000 empleos</h4>
-                            <p>Como parte de la T4 Social, el Gobierno Bolivariano implementa programas de empleo juvenil en la región del Esequibo venezolano.</p>
+                            <h4>Gran Misión Chamba Juvenil llega a Guyana Esequiba con 5.000 empleos</h4>
+                            <p>Como parte de la T4 Social, el Gobierno Bolivariano implementa programas de empleo juvenil en la región de Guyana Esequiba.</p>
                             <a href="#">Leer más →</a>
                         </div>
                     </div>
@@ -1319,60 +1392,10 @@
                 </div>
             </div>
 
-            <div class="calendar-container" id="calendarSection" style="display: none;">
-                <div class="calendar">
-                    <div class="calendar-header">
-                        <h3 id="currentMonth">Agosto 2025</h3>
-                        <div>
-                            <button class="btn btn-accent btn-small" id="prevMonth"><i class="fas fa-chevron-left"></i> Anterior</button>
-                            <button class="btn btn-small" id="nextMonth">Siguiente <i class="fas fa-chevron-right"></i></button>
-                        </div>
-                    </div>
-                    <div class="calendar-grid" id="calendarGrid">
-                        <!-- Los días se generarán dinámicamente con JavaScript -->
-                    </div>
-                </div>
-            </div>
-
             <!-- Informes y Análisis -->
             <div class="reports-list" id="reportsList" style="display: none;">
                 <h3>Informes y Análisis Disponibles</h3>
-                
-                <div class="report-item">
-                    <div class="report-info">
-                        <h4>Informe de Situación Estratégica - Agosto 2025</h4>
-                        <p><strong>Fecha:</strong> 15 de Agosto, 2025</p>
-                        <p><strong>Descripción:</strong> Análisis completo de la situación geopolítica en la región del Esequibo.</p>
-                    </div>
-                    <div class="report-actions">
-                        <button class="btn btn-accent btn-small view-report" data-title="Informe de Situación Estratégica - Agosto 2025"><i class="fas fa-eye"></i> Vista Previa</button>
-                        <button class="btn btn-small download-report"><i class="fas fa-download"></i> Descargar</button>
-                    </div>
-                </div>
-                
-                <div class="report-item">
-                    <div class="report-info">
-                        <h4>Análisis de Impacto de las 7T en la Región</h4>
-                        <p><strong>Fecha:</strong> 10 de Agosto, 2025</p>
-                        <p><strong>Descripción:</strong> Evaluación del progreso de las 7 Transformaciones en el territorio Esequibo.</p>
-                    </div>
-                    <div class="report-actions">
-                        <button class="btn btn-accent btn-small view-report" data-title="Análisis de Impacto de las 7T en la Región"><i class="fas fa-eye"></i> Vista Previa</button>
-                        <button class="btn btn-small download-report"><i class="fas fa-download"></i> Descargar</button>
-                    </div>
-                </div>
-                
-                <div class="report-item">
-                    <div class="report-info">
-                        <h4>Reporte de Comunicación Soberana - Julio 2025</h4>
-                        <p><strong>Fecha:</strong> 5 de Agosto, 2025</p>
-                        <p><strong>Descripción:</strong> Resultados de la estrategia comunicacional para la defensa de la soberanía.</p>
-                    </div>
-                    <div class="report-actions">
-                        <button class="btn btn-accent btn-small view-report" data-title="Reporte de Comunicación Soberana - Julio 2025"><i class="fas fa-eye"></i> Vista Previa</button>
-                        <button class="btn btn-small download-report"><i class="fas fa-download"></i> Descargar</button>
-                    </div>
-                </div>
+                <!-- Los informes se cargarán dinámicamente aquí -->
             </div>
 
             <!-- Formulario para subir informes -->
@@ -1399,11 +1422,34 @@
                     </div>
                     <button type="submit" class="btn" style="width: 100%"><i class="fas fa-cloud-upload-alt"></i> Subir Informe</button>
                 </form>
+                <div class="upload-status" id="uploadStatus"></div>
+                <div class="success-message" id="uploadSuccessMessage">
+                    <i class="fas fa-check-circle"></i> Informe subido correctamente.
+                </div>
+                <div class="error-message" id="uploadErrorMessage">
+                    <i class="fas fa-exclamation-circle"></i> Error al subir el informe. Intente nuevamente.
+                </div>
             </div>
 
             <!-- Botón para mostrar formulario de subida -->
             <div style="text-align: center; margin-top: 30px; display: none;" id="uploadButtonContainer">
                 <button class="btn btn-accent" id="showUploadForm"><i class="fas fa-plus"></i> Subir Nuevo Informe</button>
+            </div>
+
+            <!-- Calendario de informes -->
+            <div class="calendar-container" id="calendarSection" style="display: none;">
+                <div class="calendar">
+                    <div class="calendar-header">
+                        <h3 id="currentMonth">Agosto 2025</h3>
+                        <div>
+                            <button class="btn btn-accent btn-small" id="prevMonth"><i class="fas fa-chevron-left"></i> Anterior</button>
+                            <button class="btn btn-small" id="nextMonth">Siguiente <i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Los días se generarán dinámicamente con JavaScript -->
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1416,14 +1462,14 @@
             <div class="territory-content">
                 <div class="territory-text">
                     <h3>Nuestra Soberanía</h3>
-                    <p>El Esequibo representa para Venezuela no sólo un territorio de 159.500 km², sino la materialización de nuestra soberanía y autodeterminación como pueblo libre. Desde el Acuerdo de Ginebra de 1966, Venezuela ha mantenido una posición firme y diplomática en la defensa de sus derechos territoriales.</p>
-                    <p>La creación de la Gobernación del Esequibo Venezolano y el equipo Caribe Sur refuerza el compromiso del Gobierno Bolivariano con la recuperación pacífica de este territorio, mediante el diálogo y el derecho internacional.</p>
+                    <p>Guyana Esequiba representa para Venezuela no sólo un territorio de 159.500 km², sino la materialización de nuestra soberanía y autodeterminación como pueblo libre. Desde el Acuerdo de Ginebra de 1966, Venezuela ha mantenido una posición firme y diplomática en la defensa de sus derechos territoriales.</p>
+                    <p>La creación de Caribe Sur refuerza el compromiso del Gobierno Bolivariano con la recuperación pacífica de este territorio, mediante el diálogo y el derecho internacional.</p>
                     <a href="#" class="btn"><i class="fas fa-book"></i> Conocer más sobre nuestra historia</a>
                 </div>
                 <div class="map-container">
                     <div class="map-placeholder">
                         <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-bottom: 20px;"></i><br>
-                        Mapa Interactivo del Territorio Esequibo<br>
+                        Mapa Interactivo del Territorio Guyana Esequiba<br>
                         (Visualización en tiempo real)
                     </div>
                 </div>
@@ -1434,7 +1480,7 @@
     <!-- 7T Section -->
     <section id="tt" class="section tt-section">
         <div class="container">
-            <h2 class="section-title">7T - Transformaciones del Territorio Esequibo</h2>
+            <h2 class="section-title">7T - Transformaciones del Territorio Guyana Esequiba</h2>
             <div class="tt-grid">
                 <div class="card tt-card t1">
                     <i class="fas fa-chart-line"></i>
@@ -1480,8 +1526,8 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h3>Gobernación del Esequibo Venezolano</h3>
-                    <p>Órgano administrativo para la gestión del territorio Esequibo y la defensa de la soberanía nacional.</p>
+                    <h3>Caribe Sur</h3>
+                    <p>Órgano administrativo para la gestión del territorio Guyana Esequiba y la defensa de la soberanía nacional.</p>
                     <p>"Comunicación al servicio de la Patria, con la verdad como bandera y la eficacia como método."</p>
                 </div>
                 <div class="footer-col">
@@ -1507,12 +1553,12 @@
                     <ul>
                         <li><a href="#"><i class="fas fa-envelope"></i> caribesur@gmail.com</a></li>
                         <li><a href="#"><i class="fas fa-phone"></i> +58 412 1234567</a></li>
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Esequibo - Venezuela</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Guyana Esequiba - Venezuela</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Gobernación del Esequibo Venezolano - Grupo Caribe Sur (Gibran Flores). Todos los derechos reservados.</p>
+                <p>&copy; 2025 Caribe Sur (Gibran Flores). Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
@@ -1543,38 +1589,15 @@
             </div>
         </div>
     </div>
-
     <script>
-        // Datos de ejemplo para los informes
-        const reportData = {
-            '2025-08-05': {
-                title: 'Informe de Situación Estratégica',
-                description: 'Análisis completo de la situación geopolítica en la región del Esequibo.'
-            },
-            '2025-08-09': {
-                title: 'Análisis de Impacto de las 7T',
-                description: 'Evaluación del progreso de las 7 Transformaciones en el territorio Esequibo.'
-            },
-            '2025-08-14': {
-                title: 'Reporte de Comunicación Soberana',
-                description: 'Resultados de la estrategia comunicacional para la defensa de la soberanía.'
-            },
-            '2025-08-19': {
-                title: 'Evaluación de Infraestructura',
-                description: 'Análisis del estado de la infraestructura en la región del Esequibo.'
-            },
-            '2025-08-24': {
-                title: 'Informe de Seguridad Nacional',
-                description: 'Evaluación de las condiciones de seguridad en la zona fronteriza.'
-            },
-            '2025-08-29': {
-                title: 'Plan de Desarrollo Económico',
-                description: 'Propuestas para el desarrollo económico sostenible del territorio.'
-            }
-        };
+        // URL del script de Apps Script (reemplazar con tu URL real)
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw6V2P-PVjf1ieZsvoy2QlE4hWpbHFcz_965hr9fesbY_scoQGJdWFzVQw-iiXGK91T/exec';
+        
+        // Variable para almacenar los informes reales
+        let reportData = {};
 
         // Variables para el control del calendario
-        let currentDate = new Date(2025, 7, 1); // Agosto 2025
+        let currentDate = new Date();
         const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
         // Crear partículas para el fondo
@@ -1602,6 +1625,131 @@
                 
                 container.appendChild(particle);
             }
+        }
+        
+        // Función para cargar informes desde Google Sheets
+        async function loadReportsFromSheets() {
+            try {
+                const response = await fetch(`${SCRIPT_URL}?action=getReports`);
+                const data = await response.json();
+                
+                if (data.success && data.reports) {
+                    // Reiniciar reportData
+                    reportData = {};
+                    
+                    // Procesar cada informe
+                    data.reports.forEach(report => {
+                        // Convertir fecha al formato YYYY-MM-DD para usar como clave
+                        const dateObj = new Date(report.date);
+                        const formattedDate = `${dateObj.getFullYear()}-${String(dateObj.getMonth() + 1).padStart(2, '0')}-${String(dateObj.getDate()).padStart(2, '0')}`;
+                        
+                        // Almacenar el informe
+                        reportData[formattedDate] = {
+                            title: report.title,
+                            description: report.description,
+                            fileUrl: report.url,
+                            date: report.date
+                        };
+                    });
+                    
+                    // Actualizar la interfaz
+                    updateReportsList(data.reports);
+                    generateCalendar();
+                } else {
+                    console.error('Error al cargar informes:', data.message);
+                    // Inicializar con objeto vacío si no hay informes
+                    reportData = {};
+                    updateReportsList([]);
+                    generateCalendar();
+                }
+            } catch (error) {
+                console.error('Error al cargar informes:', error);
+                // Inicializar con objeto vacío en caso de error
+                reportData = {};
+                updateReportsList([]);
+                generateCalendar();
+            }
+        }
+
+        // Función para actualizar la lista de informes en la interfaz
+        function updateReportsList(reports) {
+            const reportsList = document.getElementById('reportsList');
+            
+            // Limpiar lista actual (excepto el título)
+            const titleElement = reportsList.querySelector('h3');
+            reportsList.innerHTML = '';
+            reportsList.appendChild(titleElement);
+            
+            if (reports.length === 0) {
+                // Mostrar mensaje si no hay informes
+                const noReportsMsg = document.createElement('div');
+                noReportsMsg.className = 'report-item';
+                noReportsMsg.innerHTML = `
+                    <div class="report-info">
+                        <h4>No hay informes disponibles</h4>
+                        <p>Utilice el formulario de subida para agregar nuevos informes.</p>
+                    </div>
+                `;
+                reportsList.appendChild(noReportsMsg);
+                return;
+            }
+            
+            // Agregar cada informe a la lista
+            reports.forEach(report => {
+                const reportItem = document.createElement('div');
+                reportItem.className = 'report-item';
+                reportItem.innerHTML = `
+                    <div class="report-info">
+                        <h4>${report.title}</h4>
+                        <p><strong>Fecha:</strong> ${formatDisplayDate(report.date)}</p>
+                        <p><strong>Descripción:</strong> ${report.description}</p>
+                    </div>
+                    <div class="report-actions">
+                        <button class="btn btn-accent btn-small view-report" data-title="${report.title}"><i class="fas fa-eye"></i> Vista Previa</button>
+                        <button class="btn btn-small download-report" data-url="${report.url}"><i class="fas fa-download"></i> Descargar</button>
+                    </div>
+                `;
+                reportsList.appendChild(reportItem);
+            });
+            
+            // Reasignar event listeners a los botones
+            reassignReportEventListeners();
+        }
+
+        // Función para formatear fecha para mostrar
+        function formatDisplayDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        // Función para reasignar event listeners a los botones de informes
+        function reassignReportEventListeners() {
+            // Vista previa de informes
+            const viewReportButtons = document.querySelectorAll('.view-report');
+            const previewModal = document.getElementById('previewModal');
+            const closePreviewModal = document.getElementById('closePreviewModal');
+            const previewTitle = document.getElementById('previewTitle');
+
+            viewReportButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const title = button.getAttribute('data-title');
+                    previewTitle.textContent = title;
+                    previewModal.style.display = 'flex';
+                });
+            });
+
+            // Descargar informes
+            const downloadButtons = document.querySelectorAll('.download-report');
+            downloadButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const fileUrl = button.getAttribute('data-url');
+                    if (fileUrl) {
+                        window.open(fileUrl, '_blank');
+                    } else {
+                        alert('No hay archivo disponible para descargar.');
+                    }
+                });
+            });
         }
         
         // Generar el calendario
@@ -1661,10 +1809,26 @@
                     });
                 } else {
                     dayElement.innerHTML = `<div class="day-number">${day}</div>`;
+                    // Añadir evento para subir informe
+                    dayElement.addEventListener('click', () => {
+                        showUploadFormForDate(dateStr);
+                    });
                 }
                 
                 calendarGrid.appendChild(dayElement);
             }
+        }
+        
+        // Mostrar formulario de subida para una fecha específica
+        function showUploadFormForDate(dateStr) {
+            document.getElementById('uploadForm').style.display = 'block';
+            document.getElementById('reportDate').value = dateStr;
+            document.getElementById('reportTitle').value = '';
+            document.getElementById('reportDescription').value = '';
+            document.getElementById('reportFile').value = '';
+            
+            // Scroll al formulario
+            document.getElementById('uploadForm').scrollIntoView({ behavior: 'smooth' });
         }
         
         // Mostrar detalles del informe
@@ -1678,34 +1842,102 @@
             
             title.textContent = report.title;
             content.innerHTML = `
-                <p><strong>Fecha:</strong> ${formatDate(dateStr)}</p>
+                <p><strong>Fecha:</strong> ${formatDisplayDate(report.date)}</p>
                 <p><strong>Descripción:</strong> ${report.description}</p>
                 <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
                     <button class="btn btn-accent view-report" data-title="${report.title}" style="flex: 1; min-width: 140px;"><i class="fas fa-eye"></i> Vista Previa</button>
-                    <button class="btn download-report" style="flex: 1; min-width: 140px;"><i class="fas fa-download"></i> Descargar</button>
-                    <button class="btn btn-accent" id="uploadReportBtn" style="flex: 1; min-width: 140px;"><i class="fas fa-upload"></i> Subir Análisis</button>
+                    <button class="btn download-report" data-url="${report.fileUrl}" style="flex: 1; min-width: 140px;"><i class="fas fa-download"></i> Descargar</button>
                 </div>
             `;
             
             modal.style.display = 'flex';
-            
-            // Añadir evento al botón de subir análisis
-            document.getElementById('uploadReportBtn').addEventListener('click', () => {
-                modal.style.display = 'none';
-                document.getElementById('uploadForm').style.display = 'block';
-                document.getElementById('reportDate').value = dateStr;
-                document.getElementById('reportTitle').value = report.title;
-                document.getElementById('reportDescription').value = report.description;
-                
-                // Scroll al formulario
-                document.getElementById('uploadForm').scrollIntoView({ behavior: 'smooth' });
-            });
         }
         
-        // Formatear fecha
-        function formatDate(dateStr) {
-            const date = new Date(dateStr);
-            return date.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        // Funciones auxiliares para mostrar estado de subida
+        function showUploadStatus(message, type) {
+            const statusElement = document.getElementById('uploadStatus');
+            statusElement.textContent = message;
+            statusElement.className = `upload-status ${type}`;
+            statusElement.style.display = 'block';
+            
+            // Ocultar otros mensajes
+            document.getElementById('uploadSuccessMessage').style.display = 'none';
+            document.getElementById('uploadErrorMessage').style.display = 'none';
+        }
+        
+        function hideUploadStatus() {
+            document.getElementById('uploadStatus').style.display = 'none';
+        }
+        
+        // Subir informe a Google Drive mediante Apps Script
+        async function uploadReportToDrive(title, date, description, file) {
+            try {
+                // Mostrar indicador de carga
+                const uploadForm = document.getElementById('reportUploadForm');
+                uploadForm.classList.add('uploading');
+                const spinner = document.createElement('div');
+                spinner.className = 'upload-spinner';
+                uploadForm.appendChild(spinner);
+                
+                // Convertir el archivo a base64
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64Content = e.target.result.split(',')[1];
+                    
+                    // Preparar datos para enviar
+                    const formData = new FormData();
+                    formData.append('title', title);
+                    formData.append('date', date);
+                    formData.append('description', description);
+                    formData.append('file', base64Content);
+                    formData.append('filename', file.name);
+                    formData.append('mimeType', file.type);
+                    
+                    // Enviar a Google Apps Script
+                    fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Mostrar mensaje de éxito
+                            showUploadStatus('¡Informe subido correctamente!', 'success');
+                            
+                            // Recargar los informes desde Google Sheets
+                            loadReportsFromSheets();
+                            
+                            // Ocultar formulario después de 2 segundos
+                            setTimeout(() => {
+                                document.getElementById('uploadForm').style.display = 'none';
+                                hideUploadStatus();
+                            }, 2000);
+                        } else {
+                            throw new Error(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        showUploadStatus('Error al subir el informe: ' + error.message, 'error');
+                    })
+                    .finally(() => {
+                        // Quitar indicador de carga
+                        uploadForm.classList.remove('uploading');
+                        const spinner = uploadForm.querySelector('.upload-spinner');
+                        if (spinner) uploadForm.removeChild(spinner);
+                    });
+                };
+                reader.readAsDataURL(file);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showUploadStatus('Error al subir el informe: ' + error.message, 'error');
+                
+                // Quitar indicador de carga
+                const uploadForm = document.getElementById('reportUploadForm');
+                uploadForm.classList.remove('uploading');
+                const spinner = uploadForm.querySelector('.upload-spinner');
+                if (spinner) uploadForm.removeChild(spinner);
+            }
         }
         
         // Observador de intersección para animaciones al hacer scroll
@@ -1729,10 +1961,13 @@
                 document.getElementById('blurOverlay').classList.add('hidden');
             }, 3000);
             
+            // Inicializar reportData como objeto vacío
+            reportData = {};
+            
             // Crear partículas
             createParticles();
             
-            // Generar calendario inicial
+            // Generar calendario inicial (vacío hasta que se carguen los informes)
             generateCalendar();
             
             // Observar elementos para animaciones
@@ -1781,7 +2016,7 @@
             // Form submission
             const loginForm = document.getElementById('loginForm');
             if (loginForm) {
-                loginForm.addEventListener('submit', (e) => {
+                loginForm.addEventListener('submit', async (e) => {
                     e.preventDefault();
                     const code = document.getElementById('code').value;
                     
@@ -1792,6 +2027,9 @@
                         document.getElementById('uploadButtonContainer').style.display = 'block';
                         document.getElementById('accessMessage').style.display = 'block';
                         document.getElementById('errorMessage').style.display = 'none';
+                        
+                        // Cargar informes reales desde Google Sheets
+                        await loadReportsFromSheets();
                         
                         // Scroll a la sección de informes
                         setTimeout(() => {
@@ -1816,11 +2054,29 @@
             // Formulario de subida de informes
             const reportUploadForm = document.getElementById('reportUploadForm');
             if (reportUploadForm) {
-                reportUploadForm.addEventListener('submit', (e) => {
+                reportUploadForm.addEventListener('submit', async (e) => {
                     e.preventDefault();
-                    alert('Informe subido correctamente. En un entorno real, esto enviaría los datos a un servidor.');
-                    reportUploadForm.reset();
-                    uploadForm.style.display = 'none';
+                    
+                    const title = document.getElementById('reportTitle').value;
+                    const date = document.getElementById('reportDate').value;
+                    const description = document.getElementById('reportDescription').value;
+                    const fileInput = document.getElementById('reportFile');
+                    
+                    if (fileInput.files.length === 0) {
+                        showUploadStatus('Por favor, seleccione un archivo PDF', 'error');
+                        return;
+                    }
+                    
+                    const file = fileInput.files[0];
+                    
+                    // Validar que sea un PDF
+                    if (file.type !== 'application/pdf') {
+                        showUploadStatus('Por favor, seleccione un archivo PDF válido', 'error');
+                        return;
+                    }
+                    
+                    // Subir el archivo
+                    await uploadReportToDrive(title, date, description, file);
                 });
             }
             
@@ -1862,14 +2118,6 @@
                 if (e.target === reportModal) {
                     reportModal.style.display = 'none';
                 }
-            });
-            
-            // Descargar informes
-            const downloadButtons = document.querySelectorAll('.download-report');
-            downloadButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    alert('Descarga iniciada. En un entorno real, esto descargaría el archivo PDF.');
-                });
             });
             
             // Smooth scrolling para enlaces internos
