@@ -6,9 +6,6 @@
     <title>Caribe Sur</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <!-- Editor de texto enriquecido -->
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <style>
         :root {
             --color-dark: #0A1A2A;
@@ -512,7 +509,7 @@
             100% { transform: translateX(0); }
         }
 
-        /* News Section - Rediseñada */
+        /* News Section */
         .news-section {
             background: var(--color-darker);
             position: relative;
@@ -537,61 +534,32 @@
             border-bottom: 2px solid var(--color-primary);
         }
 
-        .tiktok-container {
-            background: var(--color-card);
-            border-radius: var(--radius);
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-
-        .tiktok-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .tiktok-logo {
-            width: 30px;
-            height: 30px;
-            margin-right: 10px;
-            background: #000;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 16px;
-        }
-
-        .tiktok-account {
-            font-weight: 600;
-            color: var(--color-text-light);
-        }
-
         .tiktok-videos {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            background-color: var(--color-darker);
+            padding: 15px;
+            border-radius: var(--radius);
         }
 
         .tiktok-video {
-            position: relative;
-            border-radius: 12px;
+            background: var(--color-card);
+            border-radius: var(--radius);
             overflow: hidden;
-            aspect-ratio: 9/16;
-            background: var(--color-card-light);
             transition: var(--transition);
-        }
-
-        .tiktok-video:hover {
-            transform: scale(1.03);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
         }
 
         .tiktok-video iframe {
             width: 100%;
             height: 100%;
             border: none;
+            border-radius: var(--radius);
         }
 
         .tiktok-placeholder {
@@ -602,13 +570,12 @@
             color: var(--color-text);
             text-align: center;
             padding: 20px;
-            height: 100%;
         }
 
         .tiktok-placeholder i {
-            font-size: 2rem;
+            font-size: 3rem;
             color: var(--color-accent);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .news-list {
@@ -647,14 +614,6 @@
             margin-bottom: 15px;
             font-size: 0.95rem;
             line-height: 1.5;
-        }
-
-        .news-image {
-            width: 100%;
-            border-radius: 8px;
-            margin: 15px 0;
-            max-height: 250px;
-            object-fit: cover;
         }
 
         .news-item .news-content {
@@ -1135,13 +1094,6 @@
             resize: vertical;
         }
 
-        /* Editor de noticias */
-        .editor-container {
-            margin-bottom: 20px;
-            border-radius: var(--radius);
-            overflow: hidden;
-        }
-
         /* Transformations Section */
         .tt-section {
             background: linear-gradient(to bottom, var(--color-dark) 0%, var(--color-darker) 100%);
@@ -1247,7 +1199,6 @@
 
         .footer-col ul {
             list-style: none;
-            margin-bottom: 20px;
         }
 
         .footer-col ul li {
@@ -1301,7 +1252,7 @@
             border-radius: var(--radius);
             padding: 40px;
             width: 90%;
-            max-width: 800px;
+            max-width: 600px;
             position: relative;
             box-shadow: var(--shadow);
             max-height: 90vh;
@@ -1345,114 +1296,137 @@
             border: 1px solid var(--color-error);
         }
 
-        /* News Admin */
-        .news-admin {
-            margin-top: 60px;
+        /* Panel de Administración de Noticias */
+        .news-admin-panel {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: var(--shadow);
+            display: none;
         }
 
-        .news-admin-header {
+        .admin-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--color-primary);
+        }
+
+        .admin-tab {
+            padding: 12px 24px;
+            background: var(--color-card-light);
+            border: none;
+            color: var(--color-text);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .admin-tab.active {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .admin-tab-content {
+            display: none;
+        }
+
+        .admin-tab-content.active {
+            display: block;
+        }
+
+        .drafts-list, .approved-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .draft-item, .approved-item {
+            background: var(--color-card-light);
+            border-radius: var(--radius);
+            padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
         }
 
-        .news-admin-header h3 {
-            font-size: 1.8rem;
+        .draft-info h4, .approved-info h4 {
+            margin-bottom: 5px;
             color: var(--color-text-light);
         }
 
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .news-admin-card {
-            background: var(--color-card);
-            border-radius: var(--radius);
-            overflow: hidden;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .news-admin-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .news-admin-preview {
-            height: 180px;
-            background: var(--color-card-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .news-admin-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.7;
-            transition: var(--transition);
-        }
-
-        .news-admin-card:hover .news-admin-preview img {
-            opacity: 0.9;
-            transform: scale(1.05);
-        }
-
-        .news-admin-info {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .news-admin-info h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--color-text-light);
-            line-height: 1.3;
-        }
-
-        .news-admin-date {
+        .draft-date, .approved-date {
+            font-size: 0.85rem;
             color: var(--color-accent);
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
 
-        .news-admin-description {
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            flex-grow: 1;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-        }
-
-        .news-admin-actions {
+        .draft-actions, .approved-actions {
             display: flex;
             gap: 10px;
-            margin-top: auto;
         }
 
-        .news-admin-actions .btn {
-            flex: 1;
+        .news-editor {
+            background: var(--color-card-light);
+            border-radius: var(--radius);
+            padding: 20px;
+        }
+
+        .editor-preview {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .news-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .generate-news-btn {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .news-status {
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-draft {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .status-approved {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+        }
+
+        .status-published {
+            background: rgba(0, 123, 255, 0.2);
+            color: #007bff;
+        }
+
+        .empty-state {
             text-align: center;
-            padding: 10px 15px;
-            font-size: 0.85rem;
+            padding: 30px;
+            color: var(--color-text);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--color-primary);
         }
 
         /* Animaciones adicionales */
@@ -1528,8 +1502,8 @@
                 font-size: 2.5rem;
             }
 
-            .tiktok-videos {
-                grid-template-columns: repeat(2, 1fr);
+            .tiktok-video {
+                height: 300px;
             }
 
             .form-row {
@@ -1549,8 +1523,7 @@
                 font-size: 2.2rem;
             }
 
-            .reports-grid,
-            .news-grid {
+            .reports-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -1607,8 +1580,7 @@
                 font-size: 0.9rem;
             }
 
-            .report-actions,
-            .news-admin-actions {
+            .report-actions {
                 flex-direction: column;
             }
 
@@ -1629,8 +1601,7 @@
                 font-size: 0.8rem;
             }
 
-            .reports-header,
-            .news-admin-header {
+            .reports-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 15px;
@@ -1640,10 +1611,6 @@
                 width: 100%;
                 justify-content: center;
                 flex-wrap: wrap;
-            }
-
-            .tiktok-videos {
-                grid-template-columns: 1fr;
             }
         }
 
@@ -1681,8 +1648,7 @@
                 gap: 30px;
             }
 
-            .report-actions,
-            .news-admin-actions {
+            .report-actions {
                 flex-wrap: wrap;
                 justify-content: flex-start;
             }
@@ -1747,29 +1713,129 @@
         </div>
     </section>
 
-    <!-- News Section - Rediseñada -->
+    <!-- News Section -->
     <section id="noticias" class="section news-section">
         <div class="container">
             <h2 class="section-title">Línea Editorial</h2>
+
+            <!-- Panel de Administración de Noticias (solo visible después del login) -->
+            <div class="news-admin-panel" id="newsAdminPanel">
+                <div class="admin-tabs">
+                    <button class="admin-tab active" data-tab="drafts">Borradores</button>
+                    <button class="admin-tab" data-tab="approved">Aprobadas</button>
+                    <button class="admin-tab" data-tab="editor">Editor</button>
+                </div>
+
+                <!-- Pestaña de Borradores -->
+                <div class="admin-tab-content active" id="draftsTab">
+                    <h3>Borradores Generados por IA</h3>
+                    <div class="drafts-list" id="draftsList">
+                        <!-- Los borradores se cargarán dinámicamente -->
+                    </div>
+                    <button class="btn generate-news-btn" id="generateNewsBtn">
+                        <i class="fas fa-robot"></i> Generar Nuevas Noticias con IA
+                    </button>
+                </div>
+
+                <!-- Pestaña de Noticias Aprobadas -->
+                <div class="admin-tab-content" id="approvedTab">
+                    <h3>Noticias Aprobadas para Publicación</h3>
+                    <div class="approved-list" id="approvedList">
+                        <!-- Las noticias aprobadas se cargarán dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Pestaña del Editor -->
+                <div class="admin-tab-content" id="editorTab">
+                    <h3>Editor de Noticias</h3>
+                    <div class="news-editor">
+                        <div class="form-group">
+                            <label for="newsTitle">Título</label>
+                            <input type="text" id="newsTitle" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="newsContent">Contenido</label>
+                            <textarea id="newsContent" class="form-control" rows="10"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="newsAuthor">Autor</label>
+                                <input type="text" id="newsAuthor" class="form-control" value="Caribe Sur">
+                            </div>
+                            <div class="form-group">
+                                <label for="newsDate">Fecha de Publicación</label>
+                                <input type="date" id="newsDate" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newsImage">URL de Imagen</label>
+                            <input type="text" id="newsImage" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
+                        </div>
+
+                        <div class="editor-preview" id="newsPreview">
+                            <h4>Vista Previa</h4>
+                            <div id="previewContent">
+                                <p>El contenido aparecerá aquí...</p>
+                            </div>
+                        </div>
+
+                        <div class="news-controls">
+                            <button class="btn" id="saveDraftBtn"><i class="fas fa-save"></i> Guardar Borrador</button>
+                            <button class="btn btn-accent" id="publishNewsBtn"><i class="fas fa-check"></i> Aprobar y Publicar</button>
+                            <button class="btn" id="clearEditorBtn"><i class="fas fa-times"></i> Limpiar</button>
+                            <button class="btn" id="updatePreviewBtn"><i class="fas fa-eye"></i> Actualizar Vista Previa</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenedor de Noticias Públicas -->
             <div class="news-container">
                 <div class="news-column">
-                    <div class="tiktok-container">
-                        <div class="tiktok-header">
-                            <div class="tiktok-logo">
-                                <i class="fab fa-tiktok"></i>
-                            </div>
-                            <div class="tiktok-account">@karibesur</div>
+                    <h3>Últimos videos de TikTok</h3>
+                    <div class="tiktok-videos">
+                        <div class="tiktok-video">
+                            <iframe src="https://www.tiktok.com/embed/v2/7542126289927523589" frameborder="0" allowfullscreen></iframe>
                         </div>
-                        <div class="tiktok-videos" id="tiktokVideosContainer">
-                            <!-- Los videos de TikTok se cargarán dinámicamente -->
+                        <div class="tiktok-video">
+                            <iframe src="https://www.tiktok.com/embed/v2/7540872086999321912" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="tiktok-video">
+                            <iframe src="https://www.tiktok.com/embed/v2/7535225280516934917" frameborder="0" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
 
                 <div class="news-column">
                     <h3>Últimas Noticias</h3>
-                    <div class="news-list" id="newsListContainer">
-                        <!-- Las noticias se cargarán dinámicamente -->
+                    <div class="news-list" id="publicNewsList">
+                        <div class="news-item">
+                            <span class="news-date">10 de Agosto, 2025</span>
+                            <h4>Venezuela fortalece presencia en Guayana Esequiba</h4>
+                            <div class="news-content">
+                                <p>El presidente Nicolás Maduro anuncia la creación de Caribe Sur para administrar el territorio y reafirmar la soberanía nacional. Esta iniciativa representa un paso crucial en la defensa de nuestros derechos históricos sobre el territorio esequibo.</p>
+                                <p>La nueva entidad territorial contará con autoridades designadas y planes de desarrollo específicos para integrar plenamente la región al territorio nacional, garantizando servicios básicos, infraestructura y programas sociales para la población.</p>
+                            </div>
+                            <a class="read-more" onclick="toggleNews(this)">Leer más →</a>
+                        </div>
+                        <div class="news-item">
+                            <span class="news-date">8 de Agosto, 2025</span>
+                            <h4>Equipo Caribe Sur presenta informe sobre estrategia comunicacional para las 7T</h4>
+                            <div class="news-content">
+                                <p>El equipo de trabajo "Caribe Sur" ha desarrollado un modelo de acción estratégica para la difusión de las transformaciones del Gobierno Bolivariano. Este plan incluye campañas informativas, contenidos multimedia y estrategias digitales para llegar a la población.</p>
+                                <p>El informe detalla cómo se implementarán las 7 Transformaciones en la región, con especial énfasis en la soberanía comunicacional y la creación de medios locales que reflejen la identidad venezolana de Guayana Esequiba.</p>
+                            </div>
+                            <a class="read-more" onclick="toggleNews(this)">Leer más →</a>
+                        </div>
+                        <div class="news-item">
+                            <span class="news-date">5 de Agosto, 2025</span>
+                            <h4>Gran Misión Chamba Juvenil llega a Guayana Esequiba con 5.000 empleos</h4>
+                            <div class="news-content">
+                                <p>Como parte de la T4 Social, el Gobierno Bolivariano implementa programas de empleo juvenil en la región de Guayana Esequiba. Esta iniciativa busca generar oportunidades laborales para jóvenes entre 18 y 35 años en diversos sectores productivos.</p>
+                                <p>Los empleos estarán distribuidos en áreas como agricultura, turismo, construcción y servicios tecnológicos, con salarios dignos y oportunidades de crecimiento profesional dentro de la administración pública y empresas estatales.</p>
+                            </div>
+                            <a class="read-more" onclick="toggleNews(this)">Leer más →</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1862,55 +1928,9 @@
                 <div class="upload-status" id="uploadStatus"></div>
             </div>
 
-            <!-- Botón para mostrar formulario de subida de informes -->
+            <!-- Botón para mostrar formulario de subida -->
             <div style="text-align: center; margin-top: 30px; display: none;" id="uploadButtonContainer">
                 <button class="btn btn-accent" id="showUploadForm"><i class="fas fa-plus"></i> Subir Nuevo Informe</button>
-            </div>
-
-            <!-- Botón para mostrar formulario de noticias -->
-            <div style="text-align: center; margin-top: 30px; display: none;" id="newsButtonContainer">
-                <button class="btn btn-accent" id="showNewsForm"><i class="fas fa-plus"></i> Crear Nueva Noticia</button>
-            </div>
-
-            <!-- Formulario para subir noticias -->
-            <div class="upload-form" id="newsForm" style="display: none;">
-                <h3><i class="fas fa-newspaper"></i> Crear Nueva Noticia</h3>
-                <form id="newsUploadForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="newsTitle">Título de la Noticia</label>
-                            <input type="text" id="newsTitle" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="newsDate">Fecha</label>
-                            <input type="date" id="newsDate" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="newsImage">Imagen (Opcional)</label>
-                        <input type="file" id="newsImage" accept="image/*">
-                    </div>
-                    <div class="form-group">
-                        <label for="newsContent">Contenido</label>
-                        <div id="editor" class="editor-container"></div>
-                    </div>
-                    <button type="submit" class="btn" style="width: 100%"><i class="fas fa-cloud-upload-alt"></i> Publicar Noticia</button>
-                </form>
-                <div class="upload-status" id="newsUploadStatus"></div>
-            </div>
-
-            <!-- Administración de noticias -->
-            <div class="news-admin" id="newsAdmin" style="display: none;">
-                <div class="news-admin-header">
-                    <h3>Gestión de Noticias</h3>
-                    <div class="filter-buttons">
-                        <button class="btn btn-filter btn-small active" id="sortNewsNewest"><i class="fas fa-sort-amount-down"></i> Más recientes</button>
-                        <button class="btn btn-filter btn-small" id="sortNewsOldest"><i class="fas fa-sort-amount-up"></i> Más antiguos</button>
-                    </div>
-                </div>
-                <div class="news-grid" id="newsAdminGrid">
-                    <!-- Las noticias para administrar se cargarán dinámicamente -->
-                </div>
             </div>
 
             <!-- Calendario de informes -->
@@ -1993,7 +2013,7 @@
                 <div class="card tt-card t2">
                     <i class="fas fa-flag"></i>
                     <h3>T2 Independencia Plena</h3>
-                    <p>Ejercicio de la autodetermination nacional sin tutelajes imperiales, fortaleciendo nuestra soberanía.</p>
+                    <p>Ejercicio de la autodeterminación nacional sin tutelajes imperiales, fortaleciendo nuestra soberanía.</p>
                 </div>
                 <div class="card tt-card t3">
                     <i class="fas fa-shield-alt"></i>
@@ -2003,7 +2023,7 @@
                 <div class="card tt-card t4">
                     <i class="fas fa-users"></i>
                     <h3>T4 Social</h3>
-                    <p>Universalización de derechos y justicia distributiva para el bienestar colectivo del pueblo venezolano.</p>
+                    <p>Universalización de derechos and justicia distributiva para el bienestar colectivo del pueblo venezolano.</p>
                 </div>
                 <div class="card tt-card t5">
                     <i class="fas fa-balance-scale"></i>
@@ -2076,67 +2096,23 @@
         </div>
     </div>
 
-    <!-- News Detail Modal -->
-    <div class="modal" id="newsModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeNewsModal">&times;</button>
-            <h3 id="newsModalTitle">Detalles de la Noticia</h3>
-            <div id="newsModalContent">
-                <!-- El contenido se cargará dinámicamente -->
-            </div>
-        </div>
-    </div>
-
-    <!-- News Edit Modal -->
-    <div class="modal" id="newsEditModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeNewsEditModal">&times;</button>
-            <h3 id="newsEditModalTitle">Editar Noticia</h3>
-            <form id="newsEditForm">
-                <input type="hidden" id="editNewsId">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="editNewsTitle">Título de la Noticia</label>
-                        <input type="text" id="editNewsTitle" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editNewsDate">Fecha</label>
-                        <input type="date" id="editNewsDate" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="editNewsImage">Imagen (Opcional)</label>
-                    <input type="file" id="editNewsImage" accept="image/*">
-                    <div id="editNewsImagePreview" style="margin-top: 10px;"></div>
-                </div>
-                <div class="form-group">
-                    <label for="editNewsContent">Contenido</label>
-                    <div id="editEditor" class="editor-container"></div>
-                </div>
-                <button type="submit" class="btn" style="width: 100%"><i class="fas fa-save"></i> Guardar Cambios</button>
-            </form>
-            <div class="upload-status" id="newsEditStatus"></div>
-        </div>
-    </div>
-
     <script>
         // URL del script de Apps Script (reemplazar con tu URL real)
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzneJd-M2YhtFpIu0tgdUb-QOQRuufVcs4NjRcXxiLv4tgX_CUMcJSq8Iw-dHRaE-3t/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxMH4avm7DWXjmdJ7LL3Zd2VKwShSx3aUGF0vU4gEc-EQZ7XVfc2lxBCxvb1XWeF4Kf/exec';
 
-        // Variables para almacenar datos
+        // Variable para almacenar los informes reales
         let reportData = {};
         let allReports = [];
-        let newsData = [];
-        let currentEditingNews = null;
 
         // Variables para el control del calendario
         let currentDate = new Date();
         const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
         const dayNames = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
-        // Inicializar editores de texto
-        let quillEditor = null;
-        let quillEditEditor = null;
+        // Variables para gestión de noticias
+        let currentEditingNews = null;
+        let newsDrafts = [];
+        let approvedNews = [];
 
         // Función para expandir/contraer noticias
         function toggleNews(element) {
@@ -2239,284 +2215,6 @@
             h = h % 12 || 12;
 
             return `${h}:${minutes} ${period}`;
-        }
-
-        // Función para cargar videos de TikTok
-        async function loadTikTokVideos() {
-            try {
-                // En una implementación real, aquí se conectaría a la API de TikTok
-                // Por ahora, usaremos videos de ejemplo
-                const videoIds = ['7542126289927523589', '7540872086999321912', '7535225280516934917'];
-                const container = document.getElementById('tiktokVideosContainer');
-
-                container.innerHTML = '';
-
-                videoIds.forEach(id => {
-                    const videoElement = document.createElement('div');
-                    videoElement.className = 'tiktok-video';
-                    videoElement.innerHTML = `
-                        <iframe src="https://www.tiktok.com/embed/v2/${id}" frameborder="0" allowfullscreen></iframe>
-                    `;
-                    container.appendChild(videoElement);
-                });
-            } catch (error) {
-                console.error('Error al cargar videos de TikTok:', error);
-                const container = document.getElementById('tiktokVideosContainer');
-                container.innerHTML = `
-                    <div class="tiktok-placeholder">
-                        <i class="fab fa-tiktok"></i>
-                        <p>Error al cargar los videos de TikTok</p>
-                    </div>
-                `;
-            }
-        }
-
-        // Función para cargar noticias desde Google Sheets
-        async function loadNewsFromSheets() {
-            try {
-                const response = await fetch(`${SCRIPT_URL}?action=getNews`);
-                const data = await response.json();
-
-                if (data.success && data.news) {
-                    newsData = data.news;
-                    updateNewsList(newsData);
-                } else {
-                    console.error('Error al cargar noticias:', data.message);
-                    // Cargar noticias de ejemplo si hay error
-                    loadExampleNews();
-                }
-            } catch (error) {
-                console.error('Error al cargar noticias:', error);
-                // Cargar noticias de ejemplo si hay error
-                loadExampleNews();
-            }
-        }
-
-        // Función para cargar noticias de ejemplo
-        function loadExampleNews() {
-            newsData = [
-                {
-                    id: 1,
-                    title: "Venezuela fortalece presencia en Guayana Esequiba",
-                    content: "<p>El presidente Nicolás Maduro anuncia la creación de Caribe Sur para administrar el territorio y reafirmar la soberanía nacional. Esta iniciativa representa un paso crucial en la defensa de nuestros derechos históricos sobre el territorio esequibo.</p><p>La nueva entidad territorial contará con autoridades designadas y planes de desarrollo específicos para integrar plenamente la región al territorio nacional, garantizando servicios básicos, infraestructura y programas sociales para la población.</p>",
-                    date: "2025-08-10",
-                    imageUrl: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'><rect width='400' height='250' fill='%231E5631'/><text x='200' y='125' font-family='Arial' font-size='20' fill='white' text-anchor='middle'>Imagen de Noticia</text></svg>"
-                },
-                {
-                    id: 2,
-                    title: "Equipo Caribe Sur presenta informe sobre estrategia comunicacional para las 7T",
-                    content: "<p>El equipo de trabajo 'Caribe Sur' ha desarrollado un modelo de acción estratégica para la difusión de las transformaciones del Gobierno Bolivariano. Este plan incluye campañas informativas, contenidos multimedia y estrategias digitales para llegar a la población.</p><p>El informe detalla cómo se implementarán las 7 Transformaciones en la región, con especial énfasis en la soberanía comunicacional y la creación de medios locales que reflejen la identidad venezolana de Guayana Esequiba.</p>",
-                    date: "2025-08-08",
-                    imageUrl: ""
-                },
-                {
-                    id: 3,
-                    title: "Gran Misión Chamba Juvenil llega a Guayana Esequiba con 5.000 empleos",
-                    content: "<p>Como parte de la T4 Social, el Gobierno Bolivariano implementa programas de empleo juvenil en la región de Guayana Esequiba. Esta iniciativa busca generar oportunidades laborales para jóvenes entre 18 y 35 años en diversos sectores productivos.</p><p>Los empleos estarán distribuidos en áreas como agricultura, turismo, construcción y servicios tecnológicos, con salarios dignos y oportunidades de crecimiento profesional dentro de la administración pública y empresas estatales.</p>",
-                    date: "2025-08-05",
-                    imageUrl: ""
-                }
-            ];
-
-            updateNewsList(newsData);
-        }
-
-        // Función para actualizar la lista de noticias en la interfaz
-        function updateNewsList(news) {
-            const container = document.getElementById('newsListContainer');
-            container.innerHTML = '';
-
-            if (news.length === 0) {
-                container.innerHTML = `
-                    <div class="news-item">
-                        <p>No hay noticias disponibles.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            // Mostrar solo las 3 noticias más recientes
-            const recentNews = [...news].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
-
-            recentNews.forEach(newsItem => {
-                const newsElement = document.createElement('div');
-                newsElement.className = 'news-item';
-
-                let imageHtml = '';
-                if (newsItem.imageUrl) {
-                    imageHtml = `<img src="${newsItem.imageUrl}" alt="${newsItem.title}" class="news-image">`;
-                }
-
-                newsElement.innerHTML = `
-                    <span class="news-date">${formatDisplayDate(newsItem.date)}</span>
-                    <h4>${newsItem.title}</h4>
-                    <div class="news-content">
-                        ${newsItem.content}
-                        ${imageHtml}
-                    </div>
-                    <a class="read-more" onclick="toggleNews(this)">Leer más →</a>
-                `;
-                container.appendChild(newsElement);
-            });
-        }
-
-        // Función para actualizar la lista de noticias en el panel de administración
-        function updateNewsAdminList(news) {
-            const container = document.getElementById('newsAdminGrid');
-            container.innerHTML = '';
-
-            if (news.length === 0) {
-                container.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
-                        <i class="fas fa-newspaper" style="font-size: 3rem; color: var(--color-text); margin-bottom: 15px;"></i>
-                        <h4>No hay noticias disponibles</h4>
-                        <p>Utilice el formulario de creación para agregar nuevas noticias.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            news.forEach(newsItem => {
-                const newsElement = document.createElement('div');
-                newsElement.className = 'news-admin-card';
-
-                let imageHtml = '';
-                if (newsItem.imageUrl) {
-                    imageHtml = `<img src="${newsItem.imageUrl}" alt="${newsItem.title}">`;
-                } else {
-                    imageHtml = `<div style="display: flex; align-items: center; justify-content: center; height: 100%; background: var(--color-primary); color: white;"><i class="fas fa-newspaper" style="font-size: 2rem;"></i></div>`;
-                }
-
-                // Extraer texto plano del contenido HTML para la vista previa
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = newsItem.content;
-                const plainText = tempDiv.textContent || tempDiv.innerText || '';
-                const shortText = plainText.length > 150 ? plainText.substring(0, 150) + '...' : plainText;
-
-                newsElement.innerHTML = `
-                    <div class="news-admin-preview">
-                        ${imageHtml}
-                    </div>
-                    <div class="news-admin-info">
-                        <h4>${newsItem.title}</h4>
-                        <div class="news-admin-date">
-                            <i class="fas fa-calendar-alt"></i>
-                            ${formatDisplayDate(newsItem.date)}
-                        </div>
-                        <p class="news-admin-description">${shortText}</p>
-                        <div class="news-admin-actions">
-                            <button class="btn btn-small view-news" data-id="${newsItem.id}"><i class="fas fa-eye"></i> Ver</button>
-                            <button class="btn btn-accent btn-small edit-news" data-id="${newsItem.id}"><i class="fas fa-edit"></i> Editar</button>
-                            <button class="btn btn-small delete-news" data-id="${newsItem.id}" style="background: var(--color-error);"><i class="fas fa-trash"></i> Eliminar</button>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(newsElement);
-            });
-
-            // Añadir event listeners a los botones
-            document.querySelectorAll('.view-news').forEach(button => {
-                button.addEventListener('click', () => {
-                    const newsId = button.getAttribute('data-id');
-                    showNewsDetails(newsId);
-                });
-            });
-
-            document.querySelectorAll('.edit-news').forEach(button => {
-                button.addEventListener('click', () => {
-                    const newsId = button.getAttribute('data-id');
-                    editNews(newsId);
-                });
-            });
-
-            document.querySelectorAll('.delete-news').forEach(button => {
-                button.addEventListener('click', () => {
-                    const newsId = button.getAttribute('data-id');
-                    deleteNews(newsId);
-                });
-            });
-        }
-
-        // Función para mostrar detalles de una noticia
-        function showNewsDetails(newsId) {
-            const newsItem = newsData.find(item => item.id == newsId);
-            if (!newsItem) return;
-
-            const modal = document.getElementById('newsModal');
-            const title = document.getElementById('newsModalTitle');
-            const content = document.getElementById('newsModalContent');
-
-            title.textContent = newsItem.title;
-
-            let imageHtml = '';
-            if (newsItem.imageUrl) {
-                imageHtml = `<img src="${newsItem.imageUrl}" alt="${newsItem.title}" style="max-width: 100%; border-radius: 8px; margin: 15px 0;">`;
-            }
-
-            content.innerHTML = `
-                <p><strong>Fecha:</strong> ${formatDisplayDate(newsItem.date)}</p>
-                ${imageHtml}
-                <div style="margin-top: 20px;">
-                    ${newsItem.content}
-                </div>
-            `;
-
-            modal.style.display = 'flex';
-        }
-
-        // Función para editar una noticia
-        function editNews(newsId) {
-            const newsItem = newsData.find(item => item.id == newsId);
-            if (!newsItem) return;
-
-            currentEditingNews = newsItem;
-
-            const modal = document.getElementById('newsEditModal');
-            const title = document.getElementById('newsEditModalTitle');
-            const form = document.getElementById('newsEditForm');
-
-            title.textContent = `Editar Noticia: ${newsItem.title}`;
-            document.getElementById('editNewsId').value = newsItem.id;
-            document.getElementById('editNewsTitle').value = newsItem.title;
-            document.getElementById('editNewsDate').value = newsItem.date;
-
-            // Establecer el contenido en el editor
-            if (quillEditEditor) {
-                quillEditEditor.root.innerHTML = newsItem.content;
-            }
-
-            // Mostrar previsualización de la imagen actual
-            const imagePreview = document.getElementById('editNewsImagePreview');
-            if (newsItem.imageUrl) {
-                imagePreview.innerHTML = `
-                    <p>Imagen actual:</p>
-                    <img src="${newsItem.imageUrl}" alt="Imagen actual" style="max-width: 100%; max-height: 200px; border-radius: 8px; margin-top: 10px;">
-                `;
-            } else {
-                imagePreview.innerHTML = '<p>No hay imagen actual</p>';
-            }
-
-            modal.style.display = 'flex';
-        }
-
-        // Función para eliminar una noticia
-        async function deleteNews(newsId) {
-            if (!confirm('¿Está seguro de que desea eliminar esta noticia?')) {
-                return;
-            }
-
-            try {
-                // En una implementación real, aquí se enviaría una solicitud al servidor
-                // Por ahora, simulamos la eliminación
-                newsData = newsData.filter(item => item.id != newsId);
-                updateNewsAdminList(newsData);
-                updateNewsList(newsData);
-
-                alert('Noticia eliminada correctamente');
-            } catch (error) {
-                console.error('Error al eliminar noticia:', error);
-                alert('Error al eliminar la noticia');
-            }
         }
 
         // Función para cargar informes desde Google Sheets
@@ -2840,28 +2538,6 @@
             }, 3000);
         }
 
-        function showNewsUploadStatus(message, type) {
-            const statusElement = document.getElementById('newsUploadStatus');
-            statusElement.textContent = message;
-            statusElement.className = `upload-status ${type}`;
-            statusElement.style.display = 'block';
-
-            setTimeout(() => {
-                statusElement.style.display = 'none';
-            }, 3000);
-        }
-
-        function showNewsEditStatus(message, type) {
-            const statusElement = document.getElementById('newsEditStatus');
-            statusElement.textContent = message;
-            statusElement.className = `upload-status ${type}`;
-            statusElement.style.display = 'block';
-
-            setTimeout(() => {
-                statusElement.style.display = 'none';
-            }, 3000);
-        }
-
         // Subir informe a Google Drive mediante Apps Script
         async function uploadReportToDrive(title, date, time, description, file) {
             try {
@@ -2933,184 +2609,449 @@
             }
         }
 
-        // Subir noticia
-        async function uploadNewsToSheets(title, date, content, imageFile) {
+        // Funciones para gestión de noticias
+
+        // Función para cargar noticias desde Google Sheets
+        async function loadNewsFromSheets() {
             try {
-                // Mostrar indicador de carga
-                const uploadForm = document.getElementById('newsUploadForm');
-                uploadForm.classList.add('uploading');
-                const spinner = document.createElement('div');
-                spinner.className = 'upload-spinner';
-                uploadForm.appendChild(spinner);
+                const response = await fetch(`${SCRIPT_URL}?action=getNews`);
+                const data = await response.json();
 
-                let imageBase64 = '';
-                let filename = '';
-                let mimeType = '';
+                if (data.success) {
+                    // Separar borradores y noticias aprobadas
+                    newsDrafts = data.news.filter(item => item.status === 'draft');
+                    approvedNews = data.news.filter(item => item.status === 'approved');
 
-                if (imageFile) {
-                    // Convertir la imagen a base64
-                    const imageReader = new FileReader();
-                    imageReader.onload = function(e) {
-                        imageBase64 = e.target.result.split(',')[1];
-                        filename = imageFile.name;
-                        mimeType = imageFile.type;
-
-                        completeNewsUpload(title, date, content, imageBase64, filename, mimeType);
-                    };
-                    imageReader.readAsDataURL(imageFile);
+                    // Actualizar las listas en la interfaz
+                    updateDraftsList();
+                    updateApprovedList();
+                    updatePublicNewsList();
                 } else {
-                    completeNewsUpload(title, date, content, '', '', '');
+                    console.error('Error al cargar noticias:', data.message);
                 }
-
-                function completeNewsUpload(title, date, content, imageBase64, filename, mimeType) {
-                    // Preparar datos para enviar
-                    const formData = new FormData();
-                    formData.append('action', 'uploadNews');
-                    formData.append('title', title);
-                    formData.append('date', date);
-                    formData.append('content', content);
-                    formData.append('image', imageBase64);
-                    formData.append('filename', filename);
-                    formData.append('mimeType', mimeType);
-
-                    // Enviar a Google Apps Script
-                    fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Mostrar mensaje de éxito
-                            showNewsUploadStatus('¡Noticia publicada correctamente!', 'success');
-
-                            // Recargar las noticias
-                            loadNewsFromSheets();
-
-                            // Ocultar formulario después de 2 segundos
-                            setTimeout(() => {
-                                document.getElementById('newsForm').style.display = 'none';
-                                document.getElementById('newsTitle').value = '';
-                                document.getElementById('newsDate').value = '';
-                                document.getElementById('newsImage').value = '';
-                                if (quillEditor) {
-                                    quillEditor.root.innerHTML = '';
-                                }
-                            }, 2000);
-                        } else {
-                            throw new Error(data.message);
-                        }
-                    })
-                    .catch(error => {
-                        showNewsUploadStatus('Error al publicar la noticia: ' + error.message, 'error');
-                    })
-                    .finally(() => {
-                        // Quitar indicador de carga
-                        uploadForm.classList.remove('uploading');
-                        const spinner = uploadForm.querySelector('.upload-spinner');
-                        if (spinner) uploadForm.removeChild(spinner);
-                    });
-                }
-
             } catch (error) {
-                console.error('Error:', error);
-                showNewsUploadStatus('Error al publicar la noticia: ' + error.message, 'error');
-
-                // Quitar indicador de carga
-                const uploadForm = document.getElementById('newsUploadForm');
-                uploadForm.classList.remove('uploading');
-                const spinner = uploadForm.querySelector('.upload-spinner');
-                if (spinner) uploadForm.removeChild(spinner);
+                console.error('Error al cargar noticias:', error);
             }
         }
 
-        // Actualizar noticia
-        async function updateNewsInSheets(id, title, date, content, imageFile) {
-            try {
-                // Mostrar indicador de carga
-                const editForm = document.getElementById('newsEditForm');
-                editForm.classList.add('uploading');
-                const spinner = document.createElement('div');
-                spinner.className = 'upload-spinner';
-                editForm.appendChild(spinner);
+        // Función para actualizar la lista de borradores
+        function updateDraftsList() {
+            const draftsList = document.getElementById('draftsList');
+            draftsList.innerHTML = '';
 
-                let imageBase64 = '';
-                let filename = '';
-                let mimeType = '';
-
-                if (imageFile) {
-                    // Convertir la imagen a base64
-                    const imageReader = new FileReader();
-                    imageReader.onload = function(e) {
-                        imageBase64 = e.target.result.split(',')[1];
-                        filename = imageFile.name;
-                        mimeType = imageFile.type;
-
-                        completeNewsUpdate(id, title, date, content, imageBase64, filename, mimeType);
-                    };
-                    imageReader.readAsDataURL(imageFile);
-                } else {
-                    // Mantener la imagen actual si no se sube una nueva
-                    const currentNews = newsData.find(item => item.id == id);
-                    imageBase64 = currentNews.imageUrl || '';
-                    completeNewsUpdate(id, title, date, content, imageBase64, '', '');
-                }
-
-                function completeNewsUpdate(id, title, date, content, imageBase64, filename, mimeType) {
-                    // Preparar datos para enviar
-                    const formData = new FormData();
-                    formData.append('action', 'updateNews');
-                    formData.append('id', id);
-                    formData.append('title', title);
-                    formData.append('date', date);
-                    formData.append('content', content);
-                    formData.append('image', imageBase64);
-                    formData.append('filename', filename);
-                    formData.append('mimeType', mimeType);
-
-                    // Enviar a Google Apps Script
-                    fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Mostrar mensaje de éxito
-                            showNewsEditStatus('¡Noticia actualizada correctamente!', 'success');
-
-                            // Recargar las noticias
-                            loadNewsFromSheets();
-
-                            // Ocultar formulario después de 2 segundos
-                            setTimeout(() => {
-                                document.getElementById('newsEditModal').style.display = 'none';
-                            }, 2000);
-                        } else {
-                            throw new Error(data.message);
-                        }
-                    })
-                    .catch(error => {
-                        showNewsEditStatus('Error al actualizar la noticia: ' + error.message, 'error');
-                    })
-                    .finally(() => {
-                        // Quitar indicador de carga
-                        editForm.classList.remove('uploading');
-                        const spinner = editForm.querySelector('.upload-spinner');
-                        if (spinner) editForm.removeChild(spinner);
-                    });
-                }
-
-            } catch (error) {
-                console.error('Error:', error);
-                showNewsEditStatus('Error al actualizar la noticia: ' + error.message, 'error');
-
-                // Quitar indicador de carga
-                const editForm = document.getElementById('newsEditForm');
-                editForm.classList.remove('uploading');
-                const spinner = editForm.querySelector('.upload-spinner');
-                if (spinner) editForm.removeChild(spinner);
+            if (newsDrafts.length === 0) {
+                draftsList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-file-alt"></i>
+                        <h4>No hay borradores</h4>
+                        <p>Utilice el botón "Generar Noticias con IA" para crear nuevos borradores.</p>
+                    </div>
+                `;
+                return;
             }
+
+            newsDrafts.forEach(draft => {
+                const draftItem = document.createElement('div');
+                draftItem.className = 'draft-item';
+                draftItem.innerHTML = `
+                    <div class="draft-info">
+                        <h4>${draft.title}</h4>
+                        <div class="draft-date">${formatDisplayDate(draft.date)}</div>
+                        <span class="news-status status-draft">Borrador</span>
+                    </div>
+                    <div class="draft-actions">
+                        <button class="btn btn-small edit-draft" data-id="${draft.id}">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                        <button class="btn btn-accent btn-small approve-draft" data-id="${draft.id}">
+                            <i class="fas fa-check"></i> Aprobar
+                        </button>
+                        <button class="btn btn-small delete-draft" data-id="${draft.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                draftsList.appendChild(draftItem);
+            });
+
+            // Reasignar event listeners
+            reassignDraftEventListeners();
+        }
+
+        // Función para actualizar la lista de noticias aprobadas
+        function updateApprovedList() {
+            const approvedList = document.getElementById('approvedList');
+            approvedList.innerHTML = '';
+
+            if (approvedNews.length === 0) {
+                approvedList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-newspaper"></i>
+                        <h4>No hay noticias aprobadas</h4>
+                        <p>Apruebe algunos borradores para verlos aquí.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            approvedNews.forEach(news => {
+                const approvedItem = document.createElement('div');
+                approvedItem.className = 'approved-item';
+                approvedItem.innerHTML = `
+                    <div class="approved-info">
+                        <h4>${news.title}</h4>
+                        <div class="approved-date">${formatDisplayDate(news.date)}</div>
+                        <span class="news-status status-approved">Aprobada</span>
+                    </div>
+                    <div class="approved-actions">
+                        <button class="btn btn-small edit-approved" data-id="${news.id}">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                        <button class="btn btn-small unpublish-news" data-id="${news.id}">
+                            <i class="fas fa-times"></i> Despublicar
+                        </button>
+                    </div>
+                `;
+                approvedList.appendChild(approvedItem);
+            });
+
+            // Reasignar event listeners
+            reassignApprovedEventListeners();
+        }
+
+        // Función para actualizar la lista de noticias públicas
+        function updatePublicNewsList() {
+            const publicNewsList = document.getElementById('publicNewsList');
+            publicNewsList.innerHTML = '';
+
+            // Mostrar las 3 noticias más recientes aprobadas
+            const recentNews = approvedNews
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 3);
+
+            if (recentNews.length === 0) {
+                // Mostrar noticias por defecto si no hay aprobadas
+                publicNewsList.innerHTML = `
+                    <div class="news-item">
+                        <span class="news-date">10 de Agosto, 2025</span>
+                        <h4>Venezuela fortalece presencia en Guayana Esequiba</h4>
+                        <div class="news-content">
+                            <p>El presidente Nicolás Maduro anuncia la creación de Caribe Sur para administrar el territorio y reafirmar la soberanía nacional.</p>
+                        </div>
+                        <a class="read-more" onclick="toggleNews(this)">Leer más →</a>
+                    </div>
+                    <!-- Más noticias por defecto -->
+                `;
+                return;
+            }
+
+            recentNews.forEach(news => {
+                const newsItem = document.createElement('div');
+                newsItem.className = 'news-item';
+                newsItem.innerHTML = `
+                    <span class="news-date">${formatDisplayDate(news.date)}</span>
+                    <h4>${news.title}</h4>
+                    <div class="news-content">
+                        <p>${news.content.substring(0, 200)}...</p>
+                    </div>
+                    <a class="read-more" onclick="toggleNews(this)">Leer más →</a>
+                `;
+                publicNewsList.appendChild(newsItem);
+            });
+        }
+
+        // Función para generar noticias con IA
+        async function generateNewsWithAI() {
+            try {
+                const generateBtn = document.getElementById('generateNewsBtn');
+                generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generando...';
+                generateBtn.disabled = true;
+
+                const response = await fetch(`${SCRIPT_URL}?action=generateNews`);
+                const data = await response.json();
+
+                if (data.success) {
+                    // Recargar las noticias
+                    await loadNewsFromSheets();
+                    alert('Noticias generadas correctamente. Revise la pestaña de borradores.');
+                } else {
+                    alert('Error al generar noticias: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Error al generar noticias:', error);
+                alert('Error al conectar con el servidor.');
+            } finally {
+                const generateBtn = document.getElementById('generateNewsBtn');
+                generateBtn.innerHTML = '<i class="fas fa-robot"></i> Generar Nuevas Noticias con IA';
+                generateBtn.disabled = false;
+            }
+        }
+
+        // Función para guardar borrador
+        async function saveNewsDraft() {
+            const title = document.getElementById('newsTitle').value;
+            const content = document.getElementById('newsContent').value;
+            const author = document.getElementById('newsAuthor').value;
+            const date = document.getElementById('newsDate').value;
+            const imageUrl = document.getElementById('newsImage').value;
+
+            if (!title || !content) {
+                alert('Por favor, complete al menos el título y contenido.');
+                return;
+            }
+
+            try {
+                const formData = new FormData();
+                formData.append('action', 'saveNewsDraft');
+                formData.append('title', title);
+                formData.append('content', content);
+                formData.append('author', author);
+                formData.append('date', date);
+                formData.append('imageUrl', imageUrl);
+
+                if (currentEditingNews) {
+                    formData.append('id', currentEditingNews);
+                }
+
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Borrador guardado correctamente.');
+                    clearEditor();
+                    await loadNewsFromSheets();
+                } else {
+                    alert('Error al guardar borrador: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Error al guardar borrador:', error);
+                alert('Error al conectar con el servidor.');
+            }
+        }
+
+        // Función para aprobar y publicar noticia
+        async function approveAndPublishNews() {
+            const title = document.getElementById('newsTitle').value;
+            const content = document.getElementById('newsContent').value;
+
+            if (!title || !content) {
+                alert('Por favor, complete al menos el título y contenido.');
+                return;
+            }
+
+            try {
+                const formData = new FormData();
+                formData.append('action', 'approveNews');
+                formData.append('title', title);
+                formData.append('content', content);
+                formData.append('author', document.getElementById('newsAuthor').value);
+                formData.append('date', document.getElementById('newsDate').value);
+                formData.append('imageUrl', document.getElementById('newsImage').value);
+
+                if (currentEditingNews) {
+                    formData.append('id', currentEditingNews);
+                }
+
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Noticia aprobada y publicada correctamente.');
+                    clearEditor();
+                    await loadNewsFromSheets();
+                } else {
+                    alert('Error al publicar noticia: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Error al publicar noticia:', error);
+                alert('Error al conectar con el servidor.');
+            }
+        }
+
+        // Función para cargar noticia en el editor
+        async function loadNewsIntoEditor(newsId) {
+            try {
+                const response = await fetch(`${SCRIPT_URL}?action=getNewsItem&id=${newsId}`);
+                const data = await response.json();
+
+                if (data.success && data.news) {
+                    const news = data.news;
+                    document.getElementById('newsTitle').value = news.title;
+                    document.getElementById('newsContent').value = news.content;
+                    document.getElementById('newsAuthor').value = news.author;
+                    document.getElementById('newsDate').value = news.date;
+                    document.getElementById('newsImage').value = news.imageUrl || '';
+
+                    currentEditingNews = newsId;
+                    updatePreview();
+
+                    // Cambiar a la pestaña del editor
+                    switchTab('editor');
+                } else {
+                    alert('Error al cargar la noticia: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Error al cargar noticia:', error);
+                alert('Error al conectar con el servidor.');
+            }
+        }
+
+        // Función para cambiar entre pestañas
+        function switchTab(tabName) {
+            // Ocultar todas las pestañas
+            document.querySelectorAll('.admin-tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Mostrar la pestaña seleccionada
+            document.getElementById(`${tabName}Tab`).classList.add('active');
+
+            // Actualizar botones de pestaña
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            document.querySelector(`.admin-tab[data-tab="${tabName}"]`).classList.add('active');
+        }
+
+        // Función para actualizar la vista previa
+        function updatePreview() {
+            const title = document.getElementById('newsTitle').value || 'Título de ejemplo';
+            const content = document.getElementById('newsContent').value || 'Contenido de ejemplo...';
+
+            const previewContent = document.getElementById('previewContent');
+            previewContent.innerHTML = `
+                <h4>${title}</h4>
+                <p>${content}</p>
+            `;
+        }
+
+        // Función para limpiar el editor
+        function clearEditor() {
+            document.getElementById('newsTitle').value = '';
+            document.getElementById('newsContent').value = '';
+            document.getElementById('newsAuthor').value = 'Caribe Sur';
+            document.getElementById('newsDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('newsImage').value = '';
+
+            currentEditingNews = null;
+            updatePreview();
+        }
+
+        // Reasignar event listeners para borradores
+        function reassignDraftEventListeners() {
+            document.querySelectorAll('.edit-draft').forEach(button => {
+                button.addEventListener('click', () => {
+                    const newsId = button.getAttribute('data-id');
+                    loadNewsIntoEditor(newsId);
+                });
+            });
+
+            document.querySelectorAll('.approve-draft').forEach(button => {
+                button.addEventListener('click', async () => {
+                    const newsId = button.getAttribute('data-id');
+                    try {
+                        const formData = new FormData();
+                        formData.append('action', 'approveNews');
+                        formData.append('id', newsId);
+
+                        const response = await fetch(SCRIPT_URL, {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        const data = await response.json();
+
+                        if (data.success) {
+                            alert('Noticia aprobada correctamente.');
+                            await loadNewsFromSheets();
+                        } else {
+                            alert('Error al aprobar noticia: ' + data.message);
+                        }
+                    } catch (error) {
+                        console.error('Error al aprobar noticia:', error);
+                        alert('Error al conectar con el servidor.');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.delete-draft').forEach(button => {
+                button.addEventListener('click', async () => {
+                    if (confirm('¿Está seguro de que desea eliminar este borrador?')) {
+                        const newsId = button.getAttribute('data-id');
+                        try {
+                            const formData = new FormData();
+                            formData.append('action', 'deleteNews');
+                            formData.append('id', newsId);
+
+                            const response = await fetch(SCRIPT_URL, {
+                                method: 'POST',
+                                body: formData
+                            });
+
+                            const data = await response.json();
+
+                            if (data.success) {
+                                alert('Borrador eliminado correctamente.');
+                                await loadNewsFromSheets();
+                            } else {
+                                alert('Error al eliminar borrador: ' + data.message);
+                            }
+                        } catch (error) {
+                            console.error('Error al eliminar borrador:', error);
+                            alert('Error al conectar con el servidor.');
+                        }
+                    }
+                });
+            });
+        }
+
+        // Reasignar event listeners para noticias aprobadas
+        function reassignApprovedEventListeners() {
+            document.querySelectorAll('.edit-approved').forEach(button => {
+                button.addEventListener('click', () => {
+                    const newsId = button.getAttribute('data-id');
+                    loadNewsIntoEditor(newsId);
+                });
+            });
+
+            document.querySelectorAll('.unpublish-news').forEach(button => {
+                button.addEventListener('click', async () => {
+                    if (confirm('¿Está seguro de que desea despublicar esta noticia?')) {
+                        const newsId = button.getAttribute('data-id');
+                        try {
+                            const formData = new FormData();
+                            formData.append('action', 'unpublishNews');
+                            formData.append('id', newsId);
+
+                            const response = await fetch(SCRIPT_URL, {
+                                method: 'POST',
+                                body: formData
+                            });
+
+                            const data = await response.json();
+
+                            if (data.success) {
+                                alert('Noticia despublicada correctamente.');
+                                await loadNewsFromSheets();
+                            } else {
+                                alert('Error al despublicar noticia: ' + data.message);
+                            }
+                        } catch (error) {
+                            console.error('Error al despublicar noticia:', error);
+                            alert('Error al conectar con el servidor.');
+                        }
+                    }
+                });
+            });
         }
 
         // Observador de intersección para animaciones al hacer scroll
@@ -3137,45 +3078,8 @@
             // Inicializar reportData como objeto vacío
             reportData = {};
 
-            // Inicializar editores de texto
-            quillEditor = new Quill('#editor', {
-                theme: 'snow',
-                modules: {
-                    toolbar: [
-                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                        [{ 'indent': '-1'}, { 'indent': '+1' }],
-                        ['link', 'image'],
-                        ['clean']
-                    ]
-                },
-                placeholder: 'Escribe el contenido de la noticia aquí...'
-            });
-
-            quillEditEditor = new Quill('#editEditor', {
-                theme: 'snow',
-                modules: {
-                    toolbar: [
-                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                        [{ 'indent': '-1'}, { 'indent': '+1' }],
-                        ['link', 'image'],
-                        ['clean']
-                    ]
-                },
-                placeholder: 'Escribe el contenido de la noticia aquí...'
-            });
-
             // Crear partículas
             createParticles();
-
-            // Cargar videos de TikTok
-            loadTikTokVideos();
-
-            // Cargar noticias
-            loadNewsFromSheets();
 
             // Generar calendario inicial (vacío hasta que se carguen los informes)
             generateCalendar();
@@ -3250,16 +3154,15 @@
                         document.getElementById('calendarSection').style.display = 'block';
                         document.getElementById('reportsList').style.display = 'block';
                         document.getElementById('uploadButtonContainer').style.display = 'block';
-                        document.getElementById('newsButtonContainer').style.display = 'block';
-                        document.getElementById('newsAdmin').style.display = 'block';
                         document.getElementById('accessAnimation').style.display = 'block';
                         document.getElementById('errorMessage').style.display = 'none';
 
                         // Cargar informes reales desde Google Sheets
                         await loadReportsFromSheets();
 
-                        // Cargar noticias para administración
-                        updateNewsAdminList(newsData);
+                        // NUEVO: Mostrar panel de administración de noticias y cargar noticias
+                        document.getElementById('newsAdminPanel').style.display = 'block';
+                        await loadNewsFromSheets();
 
                         // Scroll a la sección de informes
                         setTimeout(() => {
@@ -3271,7 +3174,7 @@
                 });
             }
 
-            // Mostrar formulario de subida de informes
+            // Mostrar formulario de subida
             const showUploadForm = document.getElementById('showUploadForm');
             const uploadForm = document.getElementById('uploadForm');
 
@@ -3284,23 +3187,6 @@
                         const today = new Date();
                         const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
                         document.getElementById('reportDate').value = formattedDate;
-                    }
-                });
-            }
-
-            // Mostrar formulario de noticias
-            const showNewsForm = document.getElementById('showNewsForm');
-            const newsForm = document.getElementById('newsForm');
-
-            if (showNewsForm && newsForm) {
-                showNewsForm.addEventListener('click', () => {
-                    newsForm.style.display = newsForm.style.display === 'none' ? 'block' : 'none';
-
-                    // Resetear fecha al día actual si no hay fecha seleccionada
-                    if (!document.getElementById('newsDate').value) {
-                        const today = new Date();
-                        const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-                        document.getElementById('newsDate').value = formattedDate;
                     }
                 });
             }
@@ -3355,54 +3241,7 @@
                 });
             }
 
-            // Formulario de subida de noticias
-            const newsUploadForm = document.getElementById('newsUploadForm');
-            if (newsUploadForm) {
-                newsUploadForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-
-                    const title = document.getElementById('newsTitle').value;
-                    const date = document.getElementById('newsDate').value;
-                    const content = quillEditor.root.innerHTML;
-                    const imageInput = document.getElementById('newsImage');
-                    const imageFile = imageInput.files.length > 0 ? imageInput.files[0] : null;
-
-                    // Validar contenido
-                    if (content.length < 10) {
-                        showNewsUploadStatus('Por favor, escriba el contenido de la noticia', 'error');
-                        return;
-                    }
-
-                    // Subir la noticia
-                    await uploadNewsToSheets(title, date, content, imageFile);
-                });
-            }
-
-            // Formulario de edición de noticias
-            const newsEditForm = document.getElementById('newsEditForm');
-            if (newsEditForm) {
-                newsEditForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-
-                    const id = document.getElementById('editNewsId').value;
-                    const title = document.getElementById('editNewsTitle').value;
-                    const date = document.getElementById('editNewsDate').value;
-                    const content = quillEditEditor.root.innerHTML;
-                    const imageInput = document.getElementById('editNewsImage');
-                    const imageFile = imageInput.files.length > 0 ? imageInput.files[0] : null;
-
-                    // Validar contenido
-                    if (content.length < 10) {
-                        showNewsEditStatus('Por favor, escriba el contenido de la noticia', 'error');
-                        return;
-                    }
-
-                    // Actualizar la noticia
-                    await updateNewsInSheets(id, title, date, content, imageFile);
-                });
-            }
-
-            // Cerrar modales
+            // Cerrar modal de detalles de informe
             const closeReportModal = document.getElementById('closeReportModal');
             const reportModal = document.getElementById('reportModal');
 
@@ -3412,34 +3251,10 @@
                 });
             }
 
-            const closeNewsModal = document.getElementById('closeNewsModal');
-            const newsModal = document.getElementById('newsModal');
-
-            if (closeNewsModal && newsModal) {
-                closeNewsModal.addEventListener('click', () => {
-                    newsModal.style.display = 'none';
-                });
-            }
-
-            const closeNewsEditModal = document.getElementById('closeNewsEditModal');
-            const newsEditModal = document.getElementById('newsEditModal');
-
-            if (closeNewsEditModal && newsEditModal) {
-                closeNewsEditModal.addEventListener('click', () => {
-                    newsEditModal.style.display = 'none';
-                });
-            }
-
             // Cerrar modales al hacer clic fuera
             window.addEventListener('click', (e) => {
                 if (e.target === reportModal) {
                     reportModal.style.display = 'none';
-                }
-                if (e.target === newsModal) {
-                    newsModal.style.display = 'none';
-                }
-                if (e.target === newsEditModal) {
-                    newsEditModal.style.display = 'none';
                 }
             });
 
@@ -3486,30 +3301,6 @@
                 });
             });
 
-            // Filtros de noticias
-            const newsFilterButtons = document.querySelectorAll('#sortNewsNewest, #sortNewsOldest');
-
-            newsFilterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remover clase active de todos los botones
-                    newsFilterButtons.forEach(btn => btn.classList.remove('active'));
-
-                    // Agregar clase active al botón clickeado
-                    this.classList.add('active');
-
-                    // Ordenar noticias según el filtro seleccionado
-                    let sortedNews = [...newsData];
-
-                    if (this.id === 'sortNewsNewest') {
-                        sortedNews.sort((a, b) => new Date(b.date) - new Date(a.date));
-                    } else if (this.id === 'sortNewsOldest') {
-                        sortedNews.sort((a, b) => new Date(a.date) - new Date(b.date));
-                    }
-
-                    updateNewsAdminList(sortedNews);
-                });
-            });
-
             // Selector de período de tiempo (AM/PM)
             const timePeriodButtons = document.querySelectorAll('.time-period-btn');
             timePeriodButtons.forEach(button => {
@@ -3518,6 +3309,32 @@
                     this.classList.add('active');
                 });
             });
+
+            // Nuevo código para gestión de noticias
+            const newsAdminPanel = document.getElementById('newsAdminPanel');
+
+            // Event listeners para pestañas
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabName = tab.getAttribute('data-tab');
+                    switchTab(tabName);
+                });
+            });
+
+            // Event listeners para botones del editor
+            document.getElementById('saveDraftBtn').addEventListener('click', saveNewsDraft);
+            document.getElementById('publishNewsBtn').addEventListener('click', approveAndPublishNews);
+            document.getElementById('clearEditorBtn').addEventListener('click', clearEditor);
+            document.getElementById('updatePreviewBtn').addEventListener('click', updatePreview);
+
+            // Event listener para generar noticias con IA
+            document.getElementById('generateNewsBtn').addEventListener('click', generateNewsWithAI);
+
+            // Inicializar fecha actual en el editor
+            document.getElementById('newsDate').value = new Date().toISOString().split('T')[0];
+
+            // Actualizar vista previa inicial
+            updatePreview();
         });
     </script>
 </body>
